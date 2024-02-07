@@ -6,6 +6,7 @@
     public string Nombre { get; set; }
     public string[] Categorias { get; set; }
 		public string Imagen { get; set; }
+    public List<Receta> Recetas { get; set; }
 
-	}
+    }
 }

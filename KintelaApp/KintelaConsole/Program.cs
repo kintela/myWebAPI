@@ -9,9 +9,9 @@ void GetPlatos()
 {
 	using var context=new KintelaContext();
 
-	var pLATOS=context.Platos.ToList();
+	var platos=context.Platos.ToList();
 
-	foreach (var plato in pLATOS)
+	foreach (var plato in platos)
 	{
 		Console.WriteLine(plato.Nombre);
 	}
