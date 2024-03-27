@@ -7,65 +7,75 @@ using (KintelaContext context=new KintelaContext())
 	context.Database.EnsureCreated();
 }
 
+AddCategorias();
 //AddPlato();
 //GetPlatos();
-AddPlatoConReceta();
-GetPlatosConRecetas();
+//AddPlatoConReceta();
+//GetPlatosConRecetas();
 
-void AddPlato()
-{	
-
-	var plato=new Plato
+void AddCategorias()
+{
+	List<Categoria> categorias=new List<Categoria>
 	{
-		Nombre="Tortilla de Patatas",		
+		new Categoria
+		{
+			Nombre="Carne",
+		},
+		new Categoria
+		{
+			Nombre="Ensalada",
+		},
+		new Categoria
+		{
+			Nombre="Huevos",
+		},
+		new Categoria
+		{
+			Nombre="Legumbres",
+		},
+		new Categoria
+		{
+			Nombre="Pasta",
+		},
+		new Categoria
+		{
+			Nombre="Patatas",
+		},
+		new Categoria
+		{
+			Nombre="Pescado",
+		},
+		new Categoria
+		{
+			Nombre="Postre",
+		},
+		new Categoria
+		{
+			Nombre="Sandwich",
+		},
+		new Categoria
+		{
+			Nombre="Sopa",
+		},
+		new Categoria
+		{
+			Nombre="Tortilla",
+		},
+		new Categoria
+		{
+			Nombre="Verdura",
+		}
 	};
 
+	
 	using var context = new KintelaContext();
 
-	context.Platos.Add(plato);
+	context.Categorias.AddRange(categorias);
 	context.SaveChanges();
-}
-
-void GetPlatos()
-{
-	using var context=new KintelaContext();
-
-	var platos=context.Platos.ToList();
-
-	foreach (var plato in platos)
-	{
-		Console.WriteLine(plato.Nombre);
-	}
 }	
 
-void AddPlatoConReceta()
-{
-	var plato=new Plato	{	Nombre= "Garbanzos con chorizo y Zanquarrón", Categorias= new string[] { "Legumbres"} };
 
-	plato.Recetas.Add(
-		new Receta
-		{
-			Ingredientes = new string[] { "Garbanzos", "Chorizo", "Zanquarrón" },
-			Preparacion = new string[] { "bla bvla bla", "bla bla bla" }
-		});
 
-	using var context = new KintelaContext();
 
-	context.Platos.Add(plato);
-	context.SaveChanges();
-}
 
-void GetPlatosConRecetas()
-{
-	using var context = new KintelaContext();
 
-	var platos = context.Platos.Include(a => a.Recetas).ToList();
-	foreach (var plato in platos)
-	{
-		Console.WriteLine(plato.Nombre);
-		foreach (var receta in plato.Recetas)
-		{
-			Console.WriteLine("  " + receta.Ingredientes);
-		}
-	}
-}

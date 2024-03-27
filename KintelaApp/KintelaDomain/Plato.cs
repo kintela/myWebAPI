@@ -2,11 +2,15 @@
 {
 	public class Plato
 	{
+    public Plato()
+    {
+        Categorias = new List<Categoria>();
+    }
     public int Id { get; set; }
     public string Nombre { get; set; }
-    public string[] Categorias { get; set; }
 		public string Imagen { get; set; }
-    public List<Receta> Recetas { get; set; } =new List<Receta>();
+    public Receta Receta { get; set; }
+    public List<Categoria> Categorias { get; set; }
 
-    }
+  }
 }
