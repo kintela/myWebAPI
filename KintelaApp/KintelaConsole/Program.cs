@@ -66,7 +66,6 @@ void AddCategorias()
 			Nombre="Verdura",
 		}
 	};
-
 	
 	using var context = new KintelaContext();
 

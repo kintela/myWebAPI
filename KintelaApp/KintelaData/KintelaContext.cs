@@ -5,9 +5,9 @@ namespace KintelaData
 {
 	public class KintelaContext:DbContext
 	{
-		//public DbSet<Plato> Platos { get; set; }
 		public DbSet<Receta> Recetas { get; set; }
 		public DbSet<Categoria> Categorias { get; set; }
+		public DbSet<Menu> Menus { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -20,12 +20,6 @@ namespace KintelaData
 			{
 				entity.Property(e => e.Nombre).IsRequired();
 			});
-
-			/*modelBuilder.Entity<Plato>(entity =>
-			{
-				entity.Property(e => e.Nombre).IsRequired();
-				entity.Property(e => e.Imagen).IsRequired(false);
-			});*/
 
 			modelBuilder.Entity<Receta>(entity =>
 			{
