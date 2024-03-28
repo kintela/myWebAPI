@@ -34,7 +34,7 @@ namespace KintelaData.Migrations
 
                     b.HasIndex("RecetasId");
 
-                    b.ToTable("CategoriaReceta");
+                    b.ToTable("CategoriaReceta", (string)null);
                 });
 
             modelBuilder.Entity("KintelaDomain.Categoria", b =>
@@ -51,7 +51,7 @@ namespace KintelaData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categorias", (string)null);
 
                     b.HasData(
                         new
@@ -150,7 +150,7 @@ namespace KintelaData.Migrations
 
                     b.HasIndex("GrupoId");
 
-                    b.ToTable("Discos");
+                    b.ToTable("Discos", (string)null);
                 });
 
             modelBuilder.Entity("KintelaDomain.Grupo", b =>
@@ -167,7 +167,7 @@ namespace KintelaData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Grupos");
+                    b.ToTable("Grupos", (string)null);
 
                     b.HasData(
                         new
@@ -210,7 +210,7 @@ namespace KintelaData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Menus");
+                    b.ToTable("Menus", (string)null);
                 });
 
             modelBuilder.Entity("KintelaDomain.Receta", b =>
@@ -244,7 +244,7 @@ namespace KintelaData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recetas");
+                    b.ToTable("Recetas", (string)null);
                 });
 
             modelBuilder.Entity("MenuReceta", b =>
@@ -259,7 +259,7 @@ namespace KintelaData.Migrations
 
                     b.HasIndex("RecetasId");
 
-                    b.ToTable("MenuReceta");
+                    b.ToTable("MenuReceta", (string)null);
                 });
 
             modelBuilder.Entity("CategoriaReceta", b =>
