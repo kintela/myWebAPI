@@ -10,7 +10,9 @@ KintelaContext _context = new KintelaContext();
 
 //InsertNewGrupoWithDisco();
 //InsertTheWhoDiscos();
-InsertLedZeppelinDiscos();
+//InsertLedZeppelinDiscos();
+//GetGruposYDiscos();
+GetGruposYDiscosAPartirDelYear(1982);
 
 void InsertLedZeppelinDiscos()
 {
@@ -188,6 +190,38 @@ void InsertTheWhoDiscos()
 	});
 	_context.Grupos.Add(grupo);
 	_context.SaveChanges();
+}
+
+void GetGruposYDiscos()
+{
+	var grupos=_context.Grupos.Include(g => g.Discos).ToList();
+
+	grupos.ForEach(g =>
+	{
+		Console.WriteLine($"Grupo: {g.Nombre}");
+		g.Discos.ForEach(d =>
+		{
+			Console.WriteLine($"\tDisco: {d.Nombre}");
+		});
+	});
+}
+
+void GetGruposYDiscosAPartirDelYear(int year)
+{	
+	var grupos = _context.Grupos
+		.Include(g => g.Discos
+										.Where(d=>d.YearPublicacion>=year)
+										.OrderBy(d=>d.YearPublicacion))
+		.ToList();
+
+	grupos.ForEach(g =>
+	{
+		Console.WriteLine($"Grupo: {g.Nombre}");
+		g.Discos.ForEach(d =>
+		{
+			Console.WriteLine($"\tYear:{d.YearPublicacion} - Disco: {d.Nombre}");
+		});
+	});
 }
 
 

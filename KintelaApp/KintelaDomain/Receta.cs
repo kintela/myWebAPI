@@ -8,11 +8,6 @@ namespace KintelaDomain
 {
 	public class Receta
 	{
-    public Receta()
-    {
-        Categorias = new List<Categoria>();
-        Menus = new List<Menu>();
-    }
     public int RecetaId { get; set; }
     public string Nombre { get; set; }
     public string[] Ingredientes { get; set; }
@@ -21,7 +16,7 @@ namespace KintelaDomain
 		public int? Comensales { get; set; }
 		public string enlaceVideo { get; set; }
 
-    public List<Categoria> Categorias { get; set; }
-    public List<Menu> Menus { get; set; }
+    public List<Categoria> Categorias { get; set; } = new List<Categoria>();
+    public List<Menu> Menus { get; set; }=new List<Menu>();
    }
 }

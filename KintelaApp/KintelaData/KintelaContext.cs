@@ -674,6 +674,17 @@ namespace KintelaData
 				entity.Property(e => e.Comensales).IsRequired(false);
 			});
 
+			modelBuilder.Entity<Menu>(entity=>
+			{				
+				entity.Property(e => e.FechaCreacion).IsRequired();
+			});
+
+			modelBuilder.Entity<Usuario>(entity=>
+			{
+				entity.Property(e => e.Nombre).IsRequired(false);
+				entity.Property(e => e.Apellidos).IsRequired(false);
+			});
+
 		}
 	}
 }
