@@ -415,6 +415,248 @@ namespace KintelaData
 					Productor="George Martin",
 					GrupoId=1
 				},
+				new Disco
+				{
+					Id=31,
+					Nombre="The Rolling Stones",
+					YearPublicacion=1964,
+					Caratula="31.jpeg",
+					Discografica="Decca Records",
+					Productor="Andrew Loog Oldham",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=32,
+					Nombre="The Rolling Stones No. 2",
+					YearPublicacion=1965,
+					Caratula="32.jpeg",
+					Discografica="Decca Records",
+					Productor="Andrew Loog Oldham",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=33,
+					Nombre="Out of Our Heads",
+					YearPublicacion=1965,
+					Caratula="33.jpeg",
+					Discografica="Decca Records",
+					Productor="Andrew Loog Oldham",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=34,
+					Nombre="Aftermath",
+					YearPublicacion=1966,
+					Caratula="34.jpeg",
+					Discografica="Decca Records",
+					Productor="Andrew Loog Oldham",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=35,
+					Nombre="Between the Buttons",
+					YearPublicacion=1967,
+					Caratula="35.jpeg",
+					Discografica="Decca Records",
+					Productor="Andrew Loog Oldham",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=36,
+					Nombre="Their Satanic Majesties Request",
+					YearPublicacion=1967,
+					Caratula="36.jpeg",
+					Discografica="Decca Records",
+					Productor="The Rolling Stones",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=37,
+					Nombre="Beggar's Banquet",
+					YearPublicacion=1968,
+					Caratula="37.jpeg",
+					Discografica="Decca Records",
+					Productor="Jimmy Miller",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=38,
+					Nombre="Let It Bleed",
+					YearPublicacion=1969,
+					Caratula="38.jpeg",
+					Discografica="Decca Records",
+					Productor="Jimmy Miller",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=39,
+					Nombre="Sticky Fingers",
+					YearPublicacion=1971,
+					Caratula="39.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="Jimmy Miller",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=40,
+					Nombre="Exile on Main St",
+					YearPublicacion=1972,
+					Caratula="40.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="Jimmy Miller",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=41,
+					Nombre="Goats Head Soup",
+					YearPublicacion=1973,
+					Caratula="41.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="Jimmy Miller",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=42,
+					Nombre="It's Only Rock 'n Roll",
+					YearPublicacion=1974,
+					Caratula="42.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=43,
+					Nombre="Black and Blue",
+					YearPublicacion=1976,
+					Caratula="43.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=43,
+					Nombre="Some Girls",
+					YearPublicacion=1978,
+					Caratula="43.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=44,
+					Nombre="Emotional Rescue",
+					YearPublicacion=1980,
+					Caratula="44.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=45,
+					Nombre="Tatoo You",
+					YearPublicacion=1981,
+					Caratula="45.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=46,
+					Nombre="Undercover",
+					YearPublicacion=1983,
+					Caratula="46.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins, Chris Kimsey",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=47,
+					Nombre="Dirty Work",
+					YearPublicacion=1986,
+					Caratula="47.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins, Steve Lilywhite",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=48,
+					Nombre="Steel Wheels",
+					YearPublicacion=1989,
+					Caratula="48.jpeg",
+					Discografica="Rolling Stones Records",
+					Productor="The Glimmer Twins, Chris Kimsey",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=49,
+					Nombre="Voodoo Lounge",
+					YearPublicacion=1994,
+					Caratula="49.jpeg",
+					Discografica="Virgin Records",
+					Productor="The Glimmer Twins, Don Was",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=50,
+					Nombre="Bridge to Babylon",
+					YearPublicacion=1997,
+					Caratula="50.jpeg",
+					Discografica="Virgin Records",
+					Productor="The Glimmer Twins. Don Was, Rob Fraboni, Danny Saber, Pierre de Beauport. The Dust Brothers",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=51,
+					Nombre="A Bigger Bang",
+					YearPublicacion=2005,
+					Caratula="51.jpeg",
+					Discografica="Virgin Records",
+					Productor="The Glimmer Twins, Don Was, Matt Clifford",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=52,
+					Nombre="Blue & Lonesome",
+					YearPublicacion=2016,
+					Caratula="52.jpeg",
+					Discografica="Polydor Records",
+					Productor="The Glimmer Twins, Don Was",
+					GrupoId=2
+				},
+				new Disco
+				{
+					Id=53,
+					Nombre="Hackney Diamonds",
+					YearPublicacion=2023,
+					Caratula="53.jpeg",
+					Discografica="Geffen Records",
+					Productor="Andrew Watt",
+					GrupoId=2
+				},
+
+
 			};
 
 			modelBuilder.Entity<Receta>(entity =>
