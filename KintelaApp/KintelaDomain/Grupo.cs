@@ -8,7 +8,7 @@ namespace KintelaDomain
 {
 	public class Grupo
 	{
-        public int Id { get; set; }
+        public int GrupoId { get; set; }
         public string Nombre { get; set; }
 
         public List<Disco> Discos { get; set;}=new List<Disco>();

@@ -22,62 +22,62 @@ namespace KintelaData
 			{
 				new Categoria
 				{
-					Id=1,
+					CategoriaId=1,
 					Nombre="Carne",
 				},
 				new Categoria
 				{
-					Id=2,
+					CategoriaId=2,
 					Nombre="Ensalada",
 				},
 				new Categoria
 				{
-					Id=3,
+					CategoriaId=3,
 					Nombre="Huevos",
 				},
 				new Categoria
 				{
-					Id=4,
+					CategoriaId=4,
 					Nombre="Legumbres",
 				},
 				new Categoria
 				{
-					Id=5,
+					CategoriaId=5,
 					Nombre="Pasta",
 				},
 				new Categoria
 				{
-					Id=6,
+					CategoriaId=6,
 					Nombre="Patatas",
 				},
 				new Categoria
 				{
-					Id=7,
+					CategoriaId=7,
 					Nombre="Pescado",
 				},
 				new Categoria
 				{
-					Id=8,
+					CategoriaId=8,
 					Nombre="Postre",
 				},
 				new Categoria
 				{
-					Id=9,
+					CategoriaId=9,
 					Nombre="Sandwich",
 				},
 				new Categoria
 				{
-					Id=10,
+					CategoriaId=10,
 					Nombre="Sopa",
 				},
 				new Categoria
 				{
-					Id=11,
+					CategoriaId=11,
 					Nombre="Tortilla",
 				},
 				new Categoria
 				{
-					Id=12,
+					CategoriaId=12,
 					Nombre="Verdura",
 				}
 			};
@@ -87,27 +87,27 @@ namespace KintelaData
 			{
 				new Grupo
 				{
-					Id=1,
+					GrupoId=1,
 					Nombre="The Beatles",
 				},
 				new Grupo
 				{
-					Id=2,
+					GrupoId=2,
 					Nombre="The Rolling Stones",
 				},
 				new Grupo
 				{
-					Id=3,
+					GrupoId=3,
 					Nombre="Tom Petty & The Heart Breakers",
 				},
 				new Grupo
 				{
-					Id=4,
+					GrupoId=4,
 					Nombre="Tom Petty",
 				},
 				new Grupo
 				{
-					Id=5,
+					GrupoId=5,
 					Nombre="Traveling Wilburys",
 				}
 			};
@@ -117,7 +117,7 @@ namespace KintelaData
 			{
 				new Disco
 				{
-					Id=1,
+					DiscoId=1,
 					Nombre="Tom Petty & The Heartbreakers",
 					YearPublicacion=1976,
 					Caratula="1.jpg",
@@ -127,7 +127,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=2,
+					DiscoId=2,
 					Nombre="You're Gonna Get It!",
 					YearPublicacion=1978,
 					Caratula="2.jpg",
@@ -137,7 +137,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=3,
+					DiscoId=3,
 					Nombre="Damn the Torpedoes",
 					YearPublicacion=1979,
 					Caratula="3.jpg",
@@ -147,7 +147,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=4,
+					DiscoId=4,
 					Nombre="Hard Promises",
 					YearPublicacion=1981,
 					Caratula="4.jpg",
@@ -157,7 +157,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=5,
+					DiscoId=5,
 					Nombre="Long After Dark",
 					YearPublicacion=1982,
 					Caratula="5.jpg",
@@ -167,7 +167,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=6,
+					DiscoId=6,
 					Nombre="Southern Accents",
 					YearPublicacion=1985,
 					Caratula="6.jpg",
@@ -177,7 +177,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=7,
+					DiscoId=7,
 					Nombre="Let Me Up (I've Had Enough)",
 					YearPublicacion=1987,
 					Caratula="7.jpg",
@@ -187,7 +187,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=8,
+					DiscoId=8,
 					Nombre="Into the Great Wide Open",
 					YearPublicacion=1991,
 					Caratula="8.jpg",
@@ -197,7 +197,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=9,
+					DiscoId=9,
 					Nombre="Songs and Music from 'She's the One'",
 					YearPublicacion=1996,
 					Caratula="9.jpg",
@@ -207,7 +207,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=10,
+					DiscoId=10,
 					Nombre="Echo",
 					YearPublicacion=1999,
 					Caratula="10.jpg",
@@ -217,7 +217,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=11,
+					DiscoId=11,
 					Nombre="The Last DJ",
 					YearPublicacion=2002,
 					Caratula="11.jpg",
@@ -227,7 +227,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=12,
+					DiscoId=12,
 					Nombre="Mojo",
 					YearPublicacion=2010,
 					Caratula="12.jpg",
@@ -237,7 +237,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=13,
+					DiscoId=13,
 					Nombre="Hypnotic Eye",
 					YearPublicacion=2014,
 					Caratula="13.jpg",
@@ -247,7 +247,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=14,
+					DiscoId=14,
 					Nombre="Wildflowers",
 					YearPublicacion=1994,
 					Caratula="14.jpg",
@@ -257,7 +257,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=15,
+					DiscoId=15,
 					Nombre="Highway Companion",
 					YearPublicacion=2006,
 					Caratula="15.jpg",
@@ -267,7 +267,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=16,
+					DiscoId=16,
 					Nombre="Traveling Wilburys Vol. 1",
 					YearPublicacion=1998,
 					Caratula="16.jpg",
@@ -277,7 +277,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=17,
+					DiscoId=17,
 					Nombre="Traveling Wilburys Vol. 3",
 					YearPublicacion=1998,
 					Caratula="17.jpg",
@@ -287,7 +287,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=18,
+					DiscoId=18,
 					Nombre="Please Please Me",
 					YearPublicacion=1963,
 					Caratula="1.jpeg",
@@ -297,7 +297,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=19,
+					DiscoId=19,
 					Nombre="With The Beatles",
 					YearPublicacion=1963,
 					Caratula="1.jpeg",
@@ -307,7 +307,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=20,
+					DiscoId=20,
 					Nombre="A Hard Day's Night",
 					YearPublicacion=1964,
 					Caratula="2.jpeg",
@@ -317,7 +317,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=21,
+					DiscoId=21,
 					Nombre="Beatles for Sale",
 					YearPublicacion=1964,
 					Caratula="3.jpeg",
@@ -327,7 +327,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=22,
+					DiscoId=22,
 					Nombre="Help!",
 					YearPublicacion=1965,
 					Caratula="4.jpeg",
@@ -337,7 +337,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=23,
+					DiscoId=23,
 					Nombre="Rubber Soul",
 					YearPublicacion=1965,
 					Caratula="5.jpeg",
@@ -347,7 +347,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=24,
+					DiscoId=24,
 					Nombre="Revolver",
 					YearPublicacion=1966,
 					Caratula="6.jpeg",
@@ -357,7 +357,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=25,
+					DiscoId=25,
 					Nombre="Sgt. Pepper's Lonely Hearts Club Band",
 					YearPublicacion=1967,
 					Caratula="7.jpeg",
@@ -367,7 +367,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=26,
+					DiscoId=26,
 					Nombre="Magical Mystery Tour",
 					YearPublicacion=1967,
 					Caratula="8.jpeg",
@@ -377,7 +377,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=27,
+					DiscoId=27,
 					Nombre="The Beatles (White Album)",
 					YearPublicacion=1968,
 					Caratula="9.png",
@@ -387,7 +387,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=28,
+					DiscoId=28,
 					Nombre="Yellow Submarine",
 					YearPublicacion=1969,
 					Caratula="10.jpeg",
@@ -397,7 +397,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=29,
+					DiscoId=29,
 					Nombre="Abbey Road",
 					YearPublicacion=1969,
 					Caratula="11.jpeg",
@@ -407,7 +407,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=30,
+					DiscoId=30,
 					Nombre="Let It Be",
 					YearPublicacion=1970,
 					Caratula="12.jpeg",
@@ -417,7 +417,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=31,
+					DiscoId=31,
 					Nombre="The Rolling Stones",
 					YearPublicacion=1964,
 					Caratula="31.jpeg",
@@ -427,7 +427,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=32,
+					DiscoId=32,
 					Nombre="The Rolling Stones No. 2",
 					YearPublicacion=1965,
 					Caratula="32.jpeg",
@@ -437,7 +437,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=33,
+					DiscoId=33,
 					Nombre="Out of Our Heads",
 					YearPublicacion=1965,
 					Caratula="33.jpeg",
@@ -447,7 +447,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=34,
+					DiscoId=34,
 					Nombre="Aftermath",
 					YearPublicacion=1966,
 					Caratula="34.jpeg",
@@ -457,7 +457,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=35,
+					DiscoId=35,
 					Nombre="Between the Buttons",
 					YearPublicacion=1967,
 					Caratula="35.jpeg",
@@ -467,7 +467,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=36,
+					DiscoId=36,
 					Nombre="Their Satanic Majesties Request",
 					YearPublicacion=1967,
 					Caratula="36.jpeg",
@@ -477,7 +477,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=37,
+					DiscoId=37,
 					Nombre="Beggar's Banquet",
 					YearPublicacion=1968,
 					Caratula="37.jpeg",
@@ -487,7 +487,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=38,
+					DiscoId=38,
 					Nombre="Let It Bleed",
 					YearPublicacion=1969,
 					Caratula="38.jpeg",
@@ -497,7 +497,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=39,
+					DiscoId=39,
 					Nombre="Sticky Fingers",
 					YearPublicacion=1971,
 					Caratula="39.jpeg",
@@ -507,7 +507,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=40,
+					DiscoId=40,
 					Nombre="Exile on Main St",
 					YearPublicacion=1972,
 					Caratula="40.jpeg",
@@ -517,7 +517,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=41,
+					DiscoId=41,
 					Nombre="Goats Head Soup",
 					YearPublicacion=1973,
 					Caratula="41.jpeg",
@@ -527,7 +527,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=42,
+					DiscoId=42,
 					Nombre="It's Only Rock 'n Roll",
 					YearPublicacion=1974,
 					Caratula="42.jpeg",
@@ -537,7 +537,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=43,
+					DiscoId=43,
 					Nombre="Black and Blue",
 					YearPublicacion=1976,
 					Caratula="43.jpeg",
@@ -547,7 +547,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=43,
+					DiscoId=44,
 					Nombre="Some Girls",
 					YearPublicacion=1978,
 					Caratula="43.jpeg",
@@ -557,7 +557,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=44,
+					DiscoId=45,
 					Nombre="Emotional Rescue",
 					YearPublicacion=1980,
 					Caratula="44.jpeg",
@@ -567,7 +567,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=45,
+					DiscoId=46,
 					Nombre="Tatoo You",
 					YearPublicacion=1981,
 					Caratula="45.jpeg",
@@ -577,7 +577,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=46,
+					DiscoId=47,
 					Nombre="Undercover",
 					YearPublicacion=1983,
 					Caratula="46.jpeg",
@@ -587,7 +587,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=47,
+					DiscoId=48,
 					Nombre="Dirty Work",
 					YearPublicacion=1986,
 					Caratula="47.jpeg",
@@ -597,7 +597,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=48,
+					DiscoId=49,
 					Nombre="Steel Wheels",
 					YearPublicacion=1989,
 					Caratula="48.jpeg",
@@ -607,7 +607,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=49,
+					DiscoId=50,
 					Nombre="Voodoo Lounge",
 					YearPublicacion=1994,
 					Caratula="49.jpeg",
@@ -617,7 +617,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=50,
+					DiscoId=51,
 					Nombre="Bridge to Babylon",
 					YearPublicacion=1997,
 					Caratula="50.jpeg",
@@ -627,7 +627,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=51,
+					DiscoId=52,
 					Nombre="A Bigger Bang",
 					YearPublicacion=2005,
 					Caratula="51.jpeg",
@@ -637,7 +637,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=52,
+					DiscoId=53,
 					Nombre="Blue & Lonesome",
 					YearPublicacion=2016,
 					Caratula="52.jpeg",
@@ -647,7 +647,7 @@ namespace KintelaData
 				},
 				new Disco
 				{
-					Id=53,
+					DiscoId=54,
 					Nombre="Hackney Diamonds",
 					YearPublicacion=2023,
 					Caratula="53.jpeg",
@@ -658,6 +658,7 @@ namespace KintelaData
 
 
 			};
+			modelBuilder.Entity<Disco>().HasData(discos);
 
 			modelBuilder.Entity<Receta>(entity =>
 			{

@@ -8,7 +8,7 @@ namespace KintelaDomain
 {
 	public class Disco
 	{
-        public int Id { get; set; }
+        public int DiscoId { get; set; }
 				public string Nombre { get; set; }
 				public int YearPublicacion { get; set; }
 				public string Caratula { get; set; }	

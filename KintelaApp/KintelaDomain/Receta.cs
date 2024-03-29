@@ -13,7 +13,7 @@ namespace KintelaDomain
         Categorias = new List<Categoria>();
         Menus = new List<Menu>();
     }
-    public int Id { get; set; }
+    public int RecetaId { get; set; }
     public string Nombre { get; set; }
     public string[] Ingredientes { get; set; }
 		public string[] Preparacion { get; set; }

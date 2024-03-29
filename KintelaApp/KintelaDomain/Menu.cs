@@ -12,7 +12,7 @@ namespace KintelaDomain
         {
             Recetas = new List<Receta>();
         }
-        public int Id { get; set; }
+        public int MenuId { get; set; }
         public DateTime Fecha { get; set; }
 
         public List<Receta> Recetas { get; set; }
