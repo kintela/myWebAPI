@@ -8,7 +8,7 @@ namespace KintelaData
 	{
 		public DbSet<Receta> Recetas { get; set; }
 		public DbSet<Categoria> Categorias { get; set; }
-		public DbSet<Menu> Menus { get; set; }
+		public DbSet<MenuSemanal> MenuSemanal { get; set; }
 		public DbSet<Grupo> Grupos { get; set; }
 		public DbSet<Disco> Discos { get; set; }
 
@@ -674,7 +674,7 @@ namespace KintelaData
 				entity.Property(e => e.Comensales).IsRequired(false);
 			});
 
-			modelBuilder.Entity<Menu>(entity=>
+			modelBuilder.Entity<MenuSemanal>(entity=>
 			{				
 				entity.Property(e => e.FechaCreacion).IsRequired();
 			});

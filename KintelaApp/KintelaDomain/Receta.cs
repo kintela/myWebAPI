@@ -17,6 +17,6 @@ namespace KintelaDomain
 		public string enlaceVideo { get; set; }
 
     public List<Categoria> Categorias { get; set; } = new List<Categoria>();
-    public List<Menu> Menus { get; set; }=new List<Menu>();
+    public List<MenuSemanal> Menus { get; set; }=new List<MenuSemanal>();
    }
 }

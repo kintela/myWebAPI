@@ -14,6 +14,6 @@ namespace KintelaDomain
 		public string Email { get; set; }	
 		public string PasswordHash { get; set; }
 
-		public List<Menu> Menus { get; set; }=new List<Menu>();
+		public List<MenuSemanal> Menus { get; set; }=new List<MenuSemanal>();
   }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KintelaDomain
 {
-	public class Menu
+	public class MenuSemanal
 	{
-      public int MenuId { get; set; }
+      public int MenuSemanalId { get; set; }
       public DateOnly FechaCreacion { get; set; }
 
       public int? RecetaPrimerPlatoLunes { get; set; }
