@@ -12,7 +12,8 @@ KintelaContext _context = new KintelaContext();
 //InsertTheWhoDiscos();
 //InsertLedZeppelinDiscos();
 //GetGruposYDiscos();
-GetGruposYDiscosAPartirDelYear(1982);
+//GetGruposYDiscosAPartirDelYear(1982);
+ConectarCategoriasYRecetas();
 
 void InsertLedZeppelinDiscos()
 {
@@ -192,6 +193,100 @@ void InsertTheWhoDiscos()
 	_context.SaveChanges();
 }
 
+void ConectarCategoriasYRecetas()
+{
+	var categoriaPostre=_context.Categorias.FirstOrDefault(c=>c.Nombre=="Postre");
+	var categoriaCarne = _context.Categorias.FirstOrDefault(c => c.Nombre == "Carne");
+	var categoriaEnsalada = _context.Categorias.FirstOrDefault(c => c.Nombre == "Ensalada");
+	var categoriaHuevos = _context.Categorias.FirstOrDefault(c => c.Nombre == "Huevos");
+	var categoriaLegumbres = _context.Categorias.FirstOrDefault(c => c.Nombre == "Legumbres");
+	var categoriaPasta = _context.Categorias.FirstOrDefault(c => c.Nombre == "Pasta");
+	var categoriaPatatas = _context.Categorias.FirstOrDefault(c => c.Nombre == "Patatas");
+	var categoriaPescado = _context.Categorias.FirstOrDefault(c => c.Nombre == "Pescado");
+	var categoriaSandwich = _context.Categorias.FirstOrDefault(c => c.Nombre == "Sandwich");
+	var categoriaSopa = _context.Categorias.FirstOrDefault(c => c.Nombre == "Sopa");
+	var categoriaTortilla = _context.Categorias.FirstOrDefault(c => c.Nombre == "Tortilla");
+	var categoriaVerdura = _context.Categorias.FirstOrDefault(c => c.Nombre == "Verdura");
+
+	var recetasPostre=_context.Recetas.Where(r=>r.Nombre.Contains("Tarta") || r.Nombre.Contains("Galleta")).ToList();
+	foreach (var receta in recetasPostre)
+	{
+		receta.Categorias.Add(categoriaPostre);
+	}
+
+	var recetasCarne = _context.Recetas.Where(r => r.Nombre.Contains("Carne") || r.Nombre.Contains("Albóndigas") || r.Nombre.Contains("Cordero") || r.Nombre.Contains("Entrecot")
+	|| r.Nombre.Contains("Pollo") || r.Nombre.Contains("Pechuga")).ToList();
+	foreach (var receta in recetasCarne)
+	{
+		receta.Categorias.Add(categoriaCarne);
+	}
+
+	var recetasEnsalada = _context.Recetas.Where(r => r.Nombre.Contains("Ensalada")).ToList();
+	foreach (var receta in recetasEnsalada)
+	{
+		receta.Categorias.Add(categoriaEnsalada);
+	}
+
+	var recetasHuevos = _context.Recetas.Where(r => r.Nombre.Contains("Tortilla")).ToList();
+	foreach (var receta in recetasHuevos)
+	{
+		receta.Categorias.Add(categoriaHuevos);
+	}
+
+	var recetasLegumbres = _context.Recetas.Where(r => r.Nombre.Contains("Alubias") || r.Nombre.Contains("Garbanzos") || r.Nombre.Contains("Lentejas")).ToList();
+	foreach (var receta in recetasLegumbres)
+	{
+		receta.Categorias.Add(categoriaLegumbres);
+	}
+
+	var recetasPasta = _context.Recetas.Where(r => r.Nombre.Contains("Pasta")).ToList();
+	foreach (var receta in recetasPasta)
+	{
+		receta.Categorias.Add(categoriaPasta);
+	}
+
+	var recetasPatatas = _context.Recetas.Where(r => r.Nombre.Contains("Patatas")).ToList();
+	foreach (var receta in recetasPatatas)
+	{
+		receta.Categorias.Add(categoriaPatatas);
+	}
+
+	var recetasPescado = _context.Recetas.Where(r => r.Nombre.Contains("Anchoas") || r.Nombre.Contains("Bacalao") || r.Nombre.Contains("Langostinos") || r.Nombre.Contains("Lubina") || r.Nombre.Contains("Merluza") || r.Nombre.Contains("Pulpo") || r.Nombre.Contains("Rodaballo")).ToList();
+	foreach (var receta in recetasPescado)
+	{
+		receta.Categorias.Add(categoriaPescado);
+	}
+
+	var recetasSandwich = _context.Recetas.Where(r => r.Nombre.Contains("Sandwich")).ToList();
+	foreach (var receta in recetasSandwich)
+	{
+		receta.Categorias.Add(categoriaSandwich);
+	}
+
+	var recetasSopa = _context.Recetas.Where(r => r.Nombre.Contains("Sopa")).ToList();
+	foreach (var receta in recetasSopa)
+	{
+		receta.Categorias.Add(categoriaSopa);
+	}
+
+	var recetasTortilla = _context.Recetas.Where(r => r.Nombre.Contains("Tortilla")).ToList();
+	foreach (var receta in recetasTortilla)
+	{
+		receta.Categorias.Add(categoriaTortilla);
+	}
+
+	var recetasVerdura = _context.Recetas.Where(r => r.Nombre.Contains("Alcachofas") || r.Nombre.Contains("Berenjena") || r.Nombre.Contains("Brócoli") || r.Nombre.Contains("Coliflor") || r.Nombre.Contains("Guisantes") || r.Nombre.Contains("veganas") || r.Nombre.Contains("Calabaza") || r.Nombre.Contains("verduras") || r.Nombre.Contains("riojana") || r.Nombre.Contains("Puré") || r.Nombre.Contains("Vainas")).ToList();
+
+	foreach (var receta in recetasVerdura)
+	{
+		receta.Categorias.Add(categoriaVerdura);
+	}
+
+
+	_context.SaveChanges();
+
+}
+
 void GetGruposYDiscos()
 {
 	var grupos=_context.Grupos.Include(g => g.Discos).ToList();
@@ -223,6 +318,8 @@ void GetGruposYDiscosAPartirDelYear(int year)
 		});
 	});
 }
+
+
 
 
 

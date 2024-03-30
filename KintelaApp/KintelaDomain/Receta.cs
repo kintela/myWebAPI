@@ -14,7 +14,8 @@ namespace KintelaDomain
 		public string[] Preparacion { get; set; }
 		public string[] Presentacion { get; set; }
 		public int? Comensales { get; set; }
-		public string enlaceVideo { get; set; }
+		public string EnlaceVideo { get; set; }
+    public string Imagen { get; set; }
 
     public List<Categoria> Categorias { get; set; } = new List<Categoria>();
     public List<MenuSemanal> Menus { get; set; }=new List<MenuSemanal>();
