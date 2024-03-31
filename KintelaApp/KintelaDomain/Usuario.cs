@@ -13,6 +13,8 @@ namespace KintelaDomain
 		public string Apellidos { get; set; }
 		public string Email { get; set; }	
 		public string PasswordHash { get; set; }
+    public DateTime FechaAlta { get; set; }
+		public DateTime? FechaBaja { get; set; }
 
 		public List<MenuSemanal> Menus { get; set; }=new List<MenuSemanal>();
   }
