@@ -12,5 +12,6 @@ namespace KintelaDomain
         public string Nombre { get; set; }
 
         public List<Disco> Discos { get; set;}=new List<Disco>();
-  }
+				public List<CD> CDs { get; set; } = new List<CD>();
+	}
 }

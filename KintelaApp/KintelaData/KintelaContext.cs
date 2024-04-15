@@ -12,23 +12,53 @@ namespace KintelaData
 		public DbSet<MenuSemanal> MenuSemanal { get; set; }
 		public DbSet<Grupo> Grupos { get; set; }
 		public DbSet<Disco> Discos { get; set; }
+		public DbSet<CD> CDs { get; set; }
 
-    public KintelaContext(DbContextOptions<KintelaContext> options):base(options)
+		/*public KintelaContext(DbContextOptions<KintelaContext> options):base(options)
     {
             
-    }
+    }*/
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			/*optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=KintelaDatabase")
+			optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=KintelaDatabase")
 				.LogTo(Console.WriteLine, 
 					new[] { DbLoggerCategory.Database.Command.Name},
 					LogLevel.Information)
-				.EnableSensitiveDataLogging();*/
+				.EnableSensitiveDataLogging();
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<Receta>(entity =>
+			{
+				entity.Property(e => e.Preparacion).IsRequired(false);
+				entity.Property(e => e.Ingredientes).IsRequired(false);
+				entity.Property(e => e.Presentacion).IsRequired(false);
+				entity.Property(e => e.EnlaceVideo).IsRequired(false);
+				entity.Property(e => e.Comensales).IsRequired(false);
+				entity.Property(e => e.Imagen).IsRequired(false);
+			});
+
+			modelBuilder.Entity<MenuSemanal>(entity =>
+			{
+				entity.Property(e => e.FechaCreacion).IsRequired();
+			});
+
+			modelBuilder.Entity<Usuario>(entity =>
+			{
+				entity.Property(e => e.Nombre).IsRequired(false);
+				entity.Property(e => e.Apellidos).IsRequired(false);
+				entity.Property(e => e.FechaBaja).IsRequired(false);
+				entity.Property(e => e.FechaAlta).IsRequired();
+			});
+
+			modelBuilder.Entity<CD>(entity =>
+			{
+				entity.Property(e => e.caratula).IsRequired(false);
+			});
+
+
 			List<Categoria> categorias = new List<Categoria>
 			{
 				new Categoria
@@ -120,6 +150,21 @@ namespace KintelaData
 				{
 					GrupoId=5,
 					Nombre="Traveling Wilburys",
+				},
+				new Grupo
+				{
+					GrupoId=6,
+					Nombre="Corey Harris",
+				},
+				new Grupo
+				{
+					GrupoId=7,
+					Nombre="Pearl Jam",
+				},
+				new Grupo
+				{
+					GrupoId=8,
+					Nombre="Eric Clapton",
 				}
 			};
 			modelBuilder.Entity<Grupo>().HasData(grupos);
@@ -256,6 +301,7 @@ namespace KintelaData
 					Productor="Tom Petty, Mike Campbell, Ryan Ulyate",
 					GrupoId=3
 				},
+
 				new Disco
 				{
 					DiscoId=14,
@@ -276,6 +322,7 @@ namespace KintelaData
 					Productor="Jeff Lynne, Tom Petty, Mike Campbell",
 					GrupoId=4
 				},
+
 				new Disco
 				{
 					DiscoId=16,
@@ -296,6 +343,7 @@ namespace KintelaData
 					Productor="Jeff Lynne, George Harrison",
 					GrupoId=5
 				},
+
 				new Disco
 				{
 					DiscoId=18,
@@ -426,6 +474,7 @@ namespace KintelaData
 					Productor="George Martin",
 					GrupoId=1
 				},
+
 				new Disco
 				{
 					DiscoId=31,
@@ -964,31 +1013,8 @@ namespace KintelaData
 					Preparacion=["Marcas los trozos de pollo","Picas fina la verdura y la pochas","Cuando esté pochada añades el pollo","Cuando el pollo esté hecho añades el vino blanco y el ketchup"]
 				},				
 			};
-
 			modelBuilder.Entity<Receta>().HasData(recetas);
 
-			modelBuilder.Entity<Receta>(entity =>
-			{
-				entity.Property(e => e.Preparacion).IsRequired(false);
-				entity.Property(e => e.Ingredientes).IsRequired(false);
-				entity.Property(e => e.Presentacion).IsRequired(false);
-				entity.Property(e => e.EnlaceVideo).IsRequired(false);
-				entity.Property(e => e.Comensales).IsRequired(false);
-				entity.Property(e => e.Imagen).IsRequired(false);
-			});
-
-			modelBuilder.Entity<MenuSemanal>(entity=>
-			{				
-				entity.Property(e => e.FechaCreacion).IsRequired();
-			});
-
-			modelBuilder.Entity<Usuario>(entity=>
-			{
-				entity.Property(e => e.Nombre).IsRequired(false);
-				entity.Property(e => e.Apellidos).IsRequired(false);
-				entity.Property(e => e.FechaBaja).IsRequired(false);
-				entity.Property(e => e.FechaAlta).IsRequired();
-			});
 
 		}
 	}

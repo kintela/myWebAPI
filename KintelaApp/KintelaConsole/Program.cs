@@ -2,15 +2,18 @@
 using KintelaDomain;
 using Microsoft.EntityFrameworkCore;
 
-/*using (KintelaContext context=new KintelaContext())
+using (KintelaContext context=new KintelaContext())
 {
 	context.Database.EnsureCreated();
-}*/
+}
+
 KintelaContext _context = new KintelaContext();
 
-//InsertNewGrupoWithDisco();
+
 //InsertTheWhoDiscos();
 //InsertLedZeppelinDiscos();
+
+//InsertCDs();
 //GetGruposYDiscos();
 //GetGruposYDiscosAPartirDelYear(1982);
 //ConectarCategoriasYRecetas();
@@ -18,8 +21,418 @@ KintelaContext _context = new KintelaContext();
 //AñadirNuevaCategoriaYNuevaReceta();
 //GetCategoriaConSusRecetas("Carne");
 //GetRecetaYSuCategoria("Paella");
-GetAllCategoriasYSusRecetas();
+//GetAllCategoriasYSusRecetas();
 
+void InsertCDs()
+{
+	var acdc = new Grupo { Nombre = "AC/DC" };
+	var cdsacdc = new List<CD> {
+		new CD{
+			Titulo = "Back in black",
+			YearPublicacion = 1980,
+			IsInSpotify = true,
+			Etiqueta = 39
+		},
+		new CD{
+			Titulo = "Black Ice",
+			YearPublicacion = 2008,
+			IsInSpotify = true,
+			Etiqueta = 31
+		},
+		new CD{
+			Titulo = "High Voltage",
+			YearPublicacion = 1976,
+			IsInSpotify = true,
+			Etiqueta = 83
+		},
+		new CD{
+			Titulo = "Highway To Hell",
+			YearPublicacion = 1979,
+			IsInSpotify = true,
+			Etiqueta = 22
+		},
+		new CD{
+			Titulo = "Live",
+			YearPublicacion = 1991,
+			IsInSpotify = true,
+			Etiqueta = 69
+		},
+
+	};
+	acdc.CDs.AddRange(cdsacdc);
+	_context.Grupos.Add(acdc);
+
+	var adele = new Grupo { Nombre = "Adele" };
+	adele.CDs.Add(new CD
+	{
+		Titulo = "21",
+		YearPublicacion = 2011,
+		IsInSpotify = true,
+		Etiqueta = 77
+	});
+	_context.Grupos.Add(adele);
+
+	var aerosmith = new Grupo { Nombre = "Aerosmith" };
+	aerosmith.CDs.Add(new CD
+	{
+		Titulo = "Aerosmith's greatest hits 1973-1988",
+		YearPublicacion = 2008,
+		IsInSpotify = false,
+		Etiqueta = 29
+	});
+	_context.Grupos.Add(aerosmith);
+
+	var aliceinchains = new Grupo { Nombre = "Alice in chains" };
+	aliceinchains.CDs.Add(new CD
+	{
+		Titulo = "Alice In Chains",
+		YearPublicacion = 1995,
+		IsInSpotify = true,
+		Etiqueta = 538
+	});
+	_context.Grupos.Add(aliceinchains);
+
+	var amy = new Grupo { Nombre = "Amy Winehouse" };
+	amy.CDs.Add(new CD
+	{
+		Titulo = "Back to black",
+		YearPublicacion = 2007,
+		IsInSpotify = true,
+		Etiqueta = 30
+	});
+	_context.Grupos.Add(amy);
+
+	var anne = new Grupo { Nombre = "Anne MacCue" };
+	var cdsAnne = new List<CD> {
+		new CD{
+			Titulo = "East of electric",
+			YearPublicacion = 2008,
+			IsInSpotify = true,
+			Etiqueta = 41
+		},
+		new CD{
+			Titulo = "Live: Ballad of an aoutlaw women",
+			YearPublicacion = 2001,
+			IsInSpotify = false,
+			Etiqueta = 42
+		},
+	};
+
+	anne.CDs.AddRange(cdsAnne);
+	_context.Grupos.Add(anne);
+
+	var ariel = new Grupo { Nombre = "Ariel Rot" };
+	ariel.CDs.Add(new CD
+	{
+		Titulo = "Solo Rot",
+		YearPublicacion = 2010,
+		IsInSpotify = true,
+		Etiqueta = 78,
+		Firmado = true
+	});
+	_context.Grupos.Add(ariel);
+
+	var jackie = new Grupo { Nombre = "Jackie Brown" };
+	jackie.CDs.Add(new CD
+	{
+		Titulo = "Jackie Brown (B.S.O.)",
+		YearPublicacion = 1997,
+		IsInSpotify = true,
+		Etiqueta = 164,
+	});
+	_context.Grupos.Add(jackie);
+
+	var beastie = new Grupo { Nombre = "Beastie Boys" };
+	beastie.CDs.Add(new CD
+	{
+		Titulo = "Licensed To ill",
+		YearPublicacion = 1986,
+		IsInSpotify = true,
+		Etiqueta = 490,
+	});
+	_context.Grupos.Add(beastie);
+
+	var benharper = new Grupo { Nombre = "Ben Harper" };
+	var cdsbenharper = new List<CD> {
+		new CD{
+			Titulo = "Both sides of the gun",
+			YearPublicacion = 2006,
+			IsInSpotify = true,
+			Etiqueta = 51
+		},
+		new CD{
+			Titulo = "Diamonds on the inside",
+			YearPublicacion = 2003,
+			IsInSpotify = true,
+			Etiqueta = 54
+		},
+		new CD{
+			Titulo = "Fight Four Your Mind",
+			YearPublicacion = 1995,
+			IsInSpotify = true,
+			Etiqueta = 563
+		},
+		new CD{
+			Titulo = "give till it's gone",
+			YearPublicacion = 2011,
+			IsInSpotify = true,
+			Etiqueta = 82
+		},
+		new CD{
+			Titulo = "Lifeline",
+			YearPublicacion = 2007,
+			IsInSpotify = true,
+			Etiqueta = 4
+		},
+		new CD{
+			Titulo = "Live From Mars",
+			YearPublicacion = 2001,
+			IsInSpotify = true,
+			Etiqueta = 553
+		},
+		new CD{
+			Titulo = "Live from Montreal Internationa Jazz Festival",
+			YearPublicacion = 2010,
+			IsInSpotify = false,
+			Etiqueta = 66
+		},
+		new CD{
+			Titulo = "There will be a light",
+			YearPublicacion = 2004,
+			IsInSpotify = true,
+			Etiqueta = 260
+		},
+		new CD{
+			Titulo = "White lies for dark times",
+			YearPublicacion = 2009,
+			IsInSpotify = true,
+			Etiqueta = 34
+		},
+	};
+	benharper.CDs.AddRange(cdsbenharper);
+	_context.Grupos.Add(benharper);
+
+	var boddylan = new Grupo { Nombre = "Bob Dylan" };
+	var cdsBobDylan = new List<CD>
+	{
+		new CD
+		{
+			Titulo = "Modern Times",
+			YearPublicacion = 2006,
+			IsInSpotify = true,
+			Etiqueta = 18
+		},
+		new CD
+		{
+			Titulo = "Street-Legal",
+			YearPublicacion = 1978,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Pat Garret & Billy the Kid",
+			YearPublicacion = 1973,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Highway 61 Revisited",
+			YearPublicacion = 1965,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "The bootleg series Vol. 4",
+			YearPublicacion = 1966,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Bob Dylan",
+			YearPublicacion = 1962,
+			IsInSpotify = false,
+		},
+		new CD
+		{
+			Titulo = "The bootleg series Vol. 5",
+			YearPublicacion = 1975,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "New Morning",
+			YearPublicacion = 1970,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Hard Rain",
+			YearPublicacion = 1976,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Another side of Bob Dylan",
+			YearPublicacion = 1964,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "The bootleg series Vol. 6",
+			YearPublicacion = 1964,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Blonde on Blonde",
+			YearPublicacion = 1966,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "The bootleg series Vol. 1-3",
+			YearPublicacion = 1961,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Blood on the tracks",
+			YearPublicacion = 1975,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Planet waves",
+			YearPublicacion = 1974,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "At Budokan (I)",
+			YearPublicacion = 1978,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "At Budokan (II)",
+			YearPublicacion = 1978,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "The Freewheelin'",
+			YearPublicacion = 1963,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Nashville Skyline",
+			YearPublicacion = 1969,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "The times they are a-changin'",
+			YearPublicacion = 1964,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Bringing it all back home",
+			YearPublicacion = 1965,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "John Wesley harding",
+			YearPublicacion = 1967,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Selfportrait",
+			YearPublicacion = 1970,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "The bootleg series Vol. 7 (No direction home soundtrack)",
+			YearPublicacion = 1961,
+			IsInSpotify = true,
+		},
+		new CD
+		{
+			Titulo = "Desire",
+			YearPublicacion = 1976,
+			IsInSpotify = true,
+		},
+	};
+
+	boddylan.CDs.AddRange(cdsBobDylan);
+	_context.Grupos.Add(boddylan);
+
+	var bruces = new Grupo { Nombre = "Bruce Springsteen" };
+	var cdsbruce = new List<CD>
+	{
+		new CD
+		{
+			Titulo = "Born in the USA",
+			YearPublicacion = 1984,
+			IsInSpotify = true,
+			Etiqueta = 45
+		},
+		new CD
+		{
+			Titulo = "Born to run",
+			YearPublicacion = 1975,
+			IsInSpotify = true,
+			Etiqueta = 21
+		},
+		new CD
+		{
+			Titulo = "Devils & Dust",
+			YearPublicacion = 2005,
+			IsInSpotify = true,
+			Etiqueta = 44
+		},
+		new CD
+		{
+			Titulo = "Magic",
+			YearPublicacion = 2007,
+			IsInSpotify = true,
+			Etiqueta = 10
+		},
+		new CD
+		{
+			Titulo = "The Rising",
+			YearPublicacion = 2002,
+			IsInSpotify = true,
+			Etiqueta = 9
+		},
+
+
+	};
+
+	bruces.CDs.AddRange(cdsbruce);
+	_context.Grupos.Add(bruces);
+
+	var bulldozer = new Grupo { Nombre = "Bulldozer" };
+	bulldozer.CDs.Add(new CD
+	{
+		Titulo = "Adrenalina & Distorsión",
+		YearPublicacion = 2002,
+		IsInSpotify = false,
+		Etiqueta = 678,
+	});
+	_context.Grupos.Add(bulldozer);
+
+
+
+
+
+	_context.SaveChanges();
+	
+}
 void InsertLedZeppelinDiscos()
 {
 	var grupo = new Grupo { Nombre = "Led Zeppelin" };
