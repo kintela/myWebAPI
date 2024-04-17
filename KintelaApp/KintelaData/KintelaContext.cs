@@ -51,7 +51,7 @@ namespace KintelaData
 				entity.Property(e => e.Apellidos).IsRequired(false);
 				entity.Property(e => e.FechaBaja).IsRequired(false);
 				entity.Property(e => e.FechaAlta).IsRequired();
-			});
+			});			
 
 			modelBuilder.Entity<CD>(entity =>
 			{
