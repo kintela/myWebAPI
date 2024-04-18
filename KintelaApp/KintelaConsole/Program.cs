@@ -13,8 +13,9 @@ KintelaContext _context = new KintelaContext();
 
 //InsertTheWhoDiscos();
 //InsertLedZeppelinDiscos();
+//InsertCDs1();
+InsertCDs2();
 
-InsertCDs1();
 //GetGruposYDiscos();
 //GetGruposYDiscosAPartirDelYear(1982);
 //ConectarCategoriasYRecetas();
@@ -497,6 +498,369 @@ void InsertCDs1()
 
 	_context.SaveChanges();
 	
+}
+
+void InsertCDs2()
+{
+	InsertOrUpdateGrupo("Led Zeppelin", new List<CD>
+		{
+				new CD { Titulo = "III", YearPublicacion = 1970, IsInSpotify = true, Etiqueta =68 },
+				new CD { Titulo = "IV", YearPublicacion = 1971, IsInSpotify = true, Etiqueta = 243 },
+				new CD { Titulo = "Led Zeppelin", YearPublicacion = 1968, IsInSpotify = true, Etiqueta = 175 },
+				new CD { Titulo = "Led Zeppelin II", YearPublicacion = 1969, IsInSpotify = true, Etiqueta = 174 },
+				new CD { Titulo = "Physical Graffiti", YearPublicacion = 1975, IsInSpotify = true, Etiqueta = 173 },
+				new CD { Titulo = "Remasters", YearPublicacion = 1990, IsInSpotify = true, Etiqueta = 244 }
+		});
+
+	InsertOrUpdateGrupo("Lenny Kravitz", new List<CD>
+		{
+				new CD { Titulo = "Mama Said", YearPublicacion = 1991, IsInSpotify = true, Etiqueta =299 }
+		});
+
+	InsertOrUpdateGrupo("Lighthouse Family", new List<CD>
+		{ 
+				new CD { Titulo = "Postcards from heaven", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =299 }
+		});
+
+	InsertOrUpdateGrupo("Live", new List<CD>
+		{
+				new CD { Titulo = "Birds of pray", YearPublicacion = 2003, IsInSpotify = true, Etiqueta =116 },
+				new CD { Titulo = "V", YearPublicacion = 2001, IsInSpotify = true, Etiqueta =577 }
+		});
+
+	InsertOrUpdateGrupo("Lizz Wright", new List<CD>
+		{
+				new CD { Titulo = "The Orchard", YearPublicacion = 2008, IsInSpotify = true, Etiqueta =15 }
+		});
+
+	InsertOrUpdateGrupo("Lou Reed", new List<CD>
+		{
+				new CD { Titulo = "NYC Man", YearPublicacion = 2003, IsInSpotify = true, Etiqueta =84 }
+		});
+
+	InsertOrUpdateGrupo("Louis Amstrong", new List<CD>
+		{
+				new CD { Titulo = "Ella & Louis", YearPublicacion = 1957, IsInSpotify = true, Etiqueta =33 }
+		});
+
+	InsertOrUpdateGrupo("Luar Na Lubre", new List<CD>
+		{
+				new CD { Titulo = "O Son Do Ar", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =271 }
+		});
+
+	InsertOrUpdateGrupo("Lynch Mob", new List<CD>
+		{
+				new CD { Titulo = "Lynch Mob", YearPublicacion = 1992, IsInSpotify = true, Etiqueta =249 }
+		});
+
+	InsertOrUpdateGrupo("Lynrd Skynyrd", new List<CD>
+		{
+				new CD { Titulo = "A Retrospective", YearPublicacion = 1993, IsInSpotify = true, Etiqueta =250 }
+		});
+
+	InsertOrUpdateGrupo("Maceo Parker", new List<CD>
+		{
+				new CD { Titulo = "Dial Maceo", YearPublicacion = 2000, IsInSpotify = true, Etiqueta =575 }
+		});
+
+	InsertOrUpdateGrupo("Macy Gray", new List<CD>
+		{
+				new CD { Titulo = "The very best of macy gray", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =17 }
+		});
+
+	InsertOrUpdateGrupo("Marah", new List<CD>
+		{
+				new CD { Titulo = "Angels of destruction", YearPublicacion = 2008, IsInSpotify = true, Etiqueta =16 },
+				new CD { Titulo = "Let's cut the crap and hook up later on tonight", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =36 },
+		});
+
+	InsertOrUpdateGrupo("Marvin Gaye", new List<CD>
+		{
+				new CD { Titulo = "What's going on", YearPublicacion = 1971, IsInSpotify = true, Etiqueta =65 }
+		});
+
+	InsertOrUpdateGrupo("Mauri Sanchis", new List<CD>
+		{
+				new CD { Titulo = "What did you expect?", YearPublicacion = 2011, IsInSpotify = true, Etiqueta =80 }
+		});
+
+	InsertOrUpdateGrupo("Metallica", new List<CD>
+		{
+				new CD { Titulo = "Bilbao BBK Live Festival, 29 Junio 2007", YearPublicacion = 2007, IsInSpotify = false, Etiqueta =28 },
+				new CD { Titulo = "Reload", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =329 },
+		});
+
+	InsertOrUpdateGrupo("Mi Hermana Corina", new List<CD>
+	{
+			new CD { Titulo = "In a sea of prawns", YearPublicacion = 2002, IsInSpotify = true, Etiqueta =672 },
+			new CD { Titulo = "MHC", YearPublicacion = 2007, IsInSpotify = true, Etiqueta =13 },
+			new CD { Titulo = "sisterland", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =48 },
+			new CD { Titulo = "Wito", YearPublicacion = 2010, IsInSpotify = true, Etiqueta =70 },
+			new CD { Titulo = "The day after", YearPublicacion = 2012, IsInSpotify = true, Etiqueta =89 },
+			new CD { Titulo = "Stay Free", YearPublicacion = 2014, IsInSpotify = true, Etiqueta =102 },
+			new CD { Titulo = "E=mHc2", YearPublicacion = 2017, IsInSpotify = true },
+			new CD { Titulo = "While", YearPublicacion = 2021, IsInSpotify = true }
+	});
+
+	InsertOrUpdateGrupo("Michael Jackson", new List<CD>
+	{
+			new CD { Titulo = "Thriller 25 aniversario", YearPublicacion = 2008, IsInSpotify = true, Etiqueta =12 }
+	});
+
+	InsertOrUpdateGrupo("Miguel Salvador", new List<CD>
+	{
+			new CD { Titulo = "Viaje a Etreum", YearPublicacion = 2011, IsInSpotify = true, Etiqueta =81 }
+	});
+
+	InsertOrUpdateGrupo("Mike Oldfield", new List<CD>
+	{
+			new CD { Titulo = "The Orchestral Tubular Bells", YearPublicacion = 1975, IsInSpotify = true, Etiqueta =339 }
+	});
+
+	InsertOrUpdateGrupo("Miles Davis", new List<CD>
+	{
+			new CD { Titulo = "Kind of blue", YearPublicacion = 1959, IsInSpotify = true, Etiqueta =40 }
+	});
+
+	InsertOrUpdateGrupo("Mojo Project", new List<CD>
+	{
+			new CD { Titulo = "Taste the mojo", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =254 }
+	});
+
+	InsertOrUpdateGrupo("Morcheeba", new List<CD>
+	{
+			new CD { Titulo = "Dive Deep", YearPublicacion = 2007, IsInSpotify = true, Etiqueta =20 },
+			new CD { Titulo = "Fragments of freedom", YearPublicacion = 2007, IsInSpotify = true, Etiqueta =201 },
+			new CD { Titulo = "Parts of the process", YearPublicacion = 2003, IsInSpotify = true, Etiqueta =117 },
+	});
+
+	InsertOrUpdateGrupo("Neil Young", new List<CD>
+	{
+			new CD { Titulo = "Weld", YearPublicacion = 1991, IsInSpotify = true, Etiqueta =43 }
+	});
+
+	InsertOrUpdateGrupo("Ocean Colour Scene", new List<CD>
+	{
+			new CD { Titulo = "Marchin´ Already", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =337 }
+	});
+
+	InsertOrUpdateGrupo("O'funkillo", new List<CD>
+	{
+			new CD { Titulo = "…en el planeta aseituna", YearPublicacion = 2002, IsInSpotify = true, Etiqueta =61 }
+	});
+
+	InsertOrUpdateGrupo("Paco de Lucia", new List<CD>
+	{
+			new CD { Titulo = "Cositas buenas", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =196 }
+	});
+
+	InsertOrUpdateGrupo("Pearl Jam", new List<CD>
+	{
+			new CD { Titulo = "back spacer", YearPublicacion = 2009, IsInSpotify = true, Etiqueta =52 },
+			new CD { Titulo = "Pearl Jam", YearPublicacion = 2006, IsInSpotify = true, Etiqueta =52 },
+			new CD { Titulo = "Ten", YearPublicacion = 1992, IsInSpotify = true, Etiqueta =2 }
+	});
+
+	InsertOrUpdateGrupo("Pink Floyd", new List<CD>
+	{
+			new CD { Titulo = "dark side of the moon", YearPublicacion = 1973, IsInSpotify = true, Etiqueta =50 }
+	});
+
+	InsertOrUpdateGrupo("Primus", new List<CD>
+	{
+			new CD { Titulo = "Rhinoplasty", YearPublicacion = 1998, IsInSpotify = true, Etiqueta =328 }
+	});
+
+	InsertOrUpdateGrupo("Prince", new List<CD>
+	{
+			new CD { Titulo = "Planet Earth", YearPublicacion = 2007, IsInSpotify = true, Etiqueta =6 }
+	});
+
+	InsertOrUpdateGrupo("Queens of the stone age", new List<CD>
+	{
+			new CD { Titulo = "Queens of the stone age", YearPublicacion = 1998, IsInSpotify = true, Etiqueta =132 }
+	});
+
+	InsertOrUpdateGrupo("Rage Against The Machine", new List<CD>
+	{
+			new CD { Titulo = "Rage Against The Machine", YearPublicacion = 1992, IsInSpotify = true, Etiqueta =19 }
+	});
+
+	InsertOrUpdateGrupo("Red Hot Chili Peppers", new List<CD>
+	{
+			new CD { Titulo = "Blood Sugar Sex Magik", YearPublicacion = 1991, IsInSpotify = true, Etiqueta =295 },
+			new CD { Titulo = "One Hot Minute", YearPublicacion = 1995, IsInSpotify = true, Etiqueta =327 }
+	});
+
+	InsertOrUpdateGrupo("Robben Ford", new List<CD>
+	{
+			new CD { Titulo = "Blue Moon", YearPublicacion = 2002, IsInSpotify = true, Etiqueta =673 }
+	});
+
+	InsertOrUpdateGrupo("Robert Johnson", new List<CD>
+	{
+			new CD { Titulo = "Gold Collection", YearPublicacion = 1990, IsInSpotify = true, Etiqueta =296 }
+	});
+
+	InsertOrUpdateGrupo("Ronny Jordan", new List<CD>
+	{
+			new CD { Titulo = "At last", YearPublicacion = 2003, IsInSpotify = true, Etiqueta =161 },
+			new CD { Titulo = "off the record", YearPublicacion = 2001, IsInSpotify = true, Etiqueta =708 }
+	});
+
+	InsertOrUpdateGrupo("Ry Cooder", new List<CD>
+	{
+			new CD { Titulo = "Greatest Hits", YearPublicacion = 1995, IsInSpotify = true, Etiqueta =489 }
+	});
+
+	InsertOrUpdateGrupo("Ryan Adams", new List<CD>
+	{
+			new CD { Titulo = "Rock And Roll", YearPublicacion = 2003, IsInSpotify = true, Etiqueta =76 }
+	});
+
+	InsertOrUpdateGrupo("Sex Pistols", new List<CD>
+	{
+			new CD { Titulo = "never mind the bollocks", YearPublicacion = 1977, IsInSpotify = true, Etiqueta =75 }
+	});
+
+	InsertOrUpdateGrupo("Staind", new List<CD>
+	{
+			new CD { Titulo = "Break the cycle", YearPublicacion = 2001, IsInSpotify = true, Etiqueta =574 }
+	});
+
+	InsertOrUpdateGrupo("Steve Vai", new List<CD>
+	{
+			new CD { Titulo = "Alive In An Ultra World", YearPublicacion = 2001, IsInSpotify = true, Etiqueta =607 }
+	});
+
+	InsertOrUpdateGrupo("Stevie Ray Vaughan", new List<CD>
+	{
+			new CD { Titulo = "The Sky Is Crying", YearPublicacion = 1991, IsInSpotify = true, Etiqueta =386 }
+	});
+
+	InsertOrUpdateGrupo("The Beatles", new List<CD>
+	{
+			new CD { Titulo = "Abbey Road", YearPublicacion = 1969, IsInSpotify = true, Etiqueta =59 },
+			new CD { Titulo = "Revolver", YearPublicacion = 1966, IsInSpotify = true, Etiqueta =134 },
+			new CD { Titulo = "Sgt. Pepper`s Lonely hearts club band", YearPublicacion = 1967, IsInSpotify = true, Etiqueta =130 }
+	});
+
+	InsertOrUpdateGrupo("The Black Crowes", new List<CD>
+	{
+			new CD { Titulo = "Amorica", YearPublicacion = 1994, IsInSpotify = true, Etiqueta =428 },
+			new CD { Titulo = "Before the frost", YearPublicacion = 2009, IsInSpotify = true, Etiqueta =58 },
+			new CD { Titulo = "croweology", YearPublicacion = 2010, IsInSpotify = true, Etiqueta =71 },
+			new CD { Titulo = "Shake your money maker", YearPublicacion = 1990, IsInSpotify = true, Etiqueta =38 },
+			new CD { Titulo = "The southern harmony and musical companion", YearPublicacion = 1992, IsInSpotify = true, Etiqueta =668 },
+			new CD { Titulo = "Three snakes and one charm", YearPublicacion = 1996, IsInSpotify = true, Etiqueta =37 }
+	});
+
+	InsertOrUpdateGrupo("The Clash", new List<CD>
+	{
+			new CD { Titulo = "London Calling", YearPublicacion = 1979, IsInSpotify = true, Etiqueta =64 }
+	});
+
+	InsertOrUpdateGrupo("The Cult", new List<CD>
+	{
+			new CD { Titulo = "Beyond Good And Evil", YearPublicacion = 2001, IsInSpotify = true, Etiqueta =562 },
+			new CD { Titulo = "Ceremony", YearPublicacion = 1991, IsInSpotify = true, Etiqueta =92 },
+			new CD { Titulo = "Sonic Temple", YearPublicacion = 1989, IsInSpotify = true, Etiqueta =298 }
+	});
+
+	InsertOrUpdateGrupo("The Meters", new List<CD>
+	{
+			new CD { Titulo = "Sundazed", YearPublicacion = 1969, IsInSpotify = false, Etiqueta =115 }
+	});
+
+	InsertOrUpdateGrupo("The Police", new List<CD>
+	{
+			new CD { Titulo = "Reggatta de blanc", YearPublicacion = 1979, IsInSpotify = true, Etiqueta =23 }
+	});
+
+	InsertOrUpdateGrupo("The Pretenders", new List<CD>
+	{
+			new CD { Titulo = "Greatest Hits", YearPublicacion = 2000, IsInSpotify = true, Etiqueta =62 }
+	});
+
+	InsertOrUpdateGrupo("The Rolling Stones", new List<CD>
+	{
+			new CD { Titulo = "Exile on main street", YearPublicacion = 1972, IsInSpotify = true, Etiqueta =74 },
+			new CD { Titulo = "Stripped", YearPublicacion = 1995, IsInSpotify = true, Etiqueta =503 },
+			new CD { Titulo = "Tatoo You", YearPublicacion = 1981, IsInSpotify = true, Etiqueta =123 },
+			new CD { Titulo = "Vodoo Lounge", YearPublicacion = 1994, IsInSpotify = true, Etiqueta =324 }
+	});
+
+	InsertOrUpdateGrupo("The Screamin´ Cheetah Wheelies", new List<CD>
+	{
+			new CD { Titulo = "Live Volumes", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =259 }
+	});
+
+	InsertOrUpdateGrupo("The Verve", new List<CD>
+	{
+			new CD { Titulo = "Urban Hymns", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =317 }
+	});
+
+	InsertOrUpdateGrupo("Tom Waits", new List<CD>
+	{
+			new CD { Titulo = "Beautiful maladies", YearPublicacion = 1998, IsInSpotify = true, Etiqueta =63 }
+	});
+
+	InsertOrUpdateGrupo("Train", new List<CD>
+	{
+			new CD { Titulo = "Drops of Jupiter", YearPublicacion = 2001, IsInSpotify = true, Etiqueta =603 }
+	});
+
+	InsertOrUpdateGrupo("U2", new List<CD>
+	{
+			new CD { Titulo = "How to dismantle an atomic bomb", YearPublicacion = 2004, IsInSpotify = true, Etiqueta =101 }
+	});
+
+	InsertOrUpdateGrupo("US3", new List<CD>
+	{
+			new CD { Titulo = "Broadway & 52nd", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =53 }
+	});
+
+	InsertOrUpdateGrupo("Van Halen", new List<CD>
+	{
+			new CD { Titulo = "1984", YearPublicacion = 1983, IsInSpotify = true, Etiqueta =302 },
+			new CD { Titulo = "5150", YearPublicacion = 1986, IsInSpotify = true, Etiqueta =303 },
+			new CD { Titulo = "Balance", YearPublicacion = 1995, IsInSpotify = true, Etiqueta =304 },
+			new CD { Titulo = "Diver Down", YearPublicacion = 1982, IsInSpotify = true, Etiqueta =305 },
+			new CD { Titulo = "Fair Warning", YearPublicacion = 1981, IsInSpotify = true, Etiqueta =306 },
+			new CD { Titulo = "Van Halen", YearPublicacion = 1978, IsInSpotify = true, Etiqueta =331 },
+			new CD { Titulo = "Women And Children First", YearPublicacion = 1980, IsInSpotify = true, Etiqueta =311 }
+	});
+
+	InsertOrUpdateGrupo("Varios", new List<CD>
+	{
+			new CD { Titulo = "Alligator Records", YearPublicacion = 2006, IsInSpotify = false, Etiqueta =8 }
+	});
+
+	InsertOrUpdateGrupo("Whitesnake", new List<CD>
+	{
+			new CD { Titulo = "Greatest Hits", YearPublicacion = 1994, IsInSpotify = true, Etiqueta =67 }
+	});
+
+	InsertOrUpdateGrupo("Wolfmother", new List<CD>
+	{
+			new CD { Titulo = "Wolfmother", YearPublicacion = 2006, IsInSpotify = true, Etiqueta =49 }
+	});
+
+	InsertOrUpdateGrupo("WOP", new List<CD>
+	{
+			new CD { Titulo = "2t", YearPublicacion = 2011, IsInSpotify = false, Etiqueta =87 },
+			new CD { Titulo = "WOP(Maxi)", YearPublicacion = 2011, IsInSpotify = false, Etiqueta =79 }
+	});
+
+	InsertOrUpdateGrupo("ZZ Top", new List<CD>
+	{
+			new CD { Titulo = "Eliminator", YearPublicacion = 1983, IsInSpotify = true, Etiqueta =332 },
+			new CD { Titulo = "Tres Hombres", YearPublicacion = 1973, IsInSpotify = true, Etiqueta =27 },
+			new CD { Titulo = "Fandango", YearPublicacion = 1975, IsInSpotify = true, Etiqueta =27 }
+	});
+
+	_context.SaveChanges();
+
 }
 
 void InsertOrUpdateGrupo(string nombreGrupo, List<CD> cds)
