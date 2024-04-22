@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KintelaContext>(
 	opt =>opt
-	.UseSqlServer(builder.Configuration.GetConnectionString("KintelaConnection"))
+	.UseSqlServer(builder.Configuration.GetConnectionString("KintelaDatabaseAzure"))
 	.EnableSensitiveDataLogging()
 	.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 );

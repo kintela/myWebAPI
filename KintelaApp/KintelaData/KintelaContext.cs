@@ -14,18 +14,20 @@ namespace KintelaData
 		public DbSet<Disco> Discos { get; set; }
 		public DbSet<CD> CDs { get; set; }
 
-		/*public KintelaContext(DbContextOptions<KintelaContext> options):base(options)
+		public KintelaContext(DbContextOptions<KintelaContext> options):base(options)
     {
             
-    }*/
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=KintelaDatabase")
+			/*optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=KintelaDatabase")
 				.LogTo(Console.WriteLine, 
 					new[] { DbLoggerCategory.Database.Command.Name},
 					LogLevel.Information)
-				.EnableSensitiveDataLogging();
+				.EnableSensitiveDataLogging();*/
+
+			
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

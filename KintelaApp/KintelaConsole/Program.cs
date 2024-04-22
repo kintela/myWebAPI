@@ -1,14 +1,31 @@
 ﻿using KintelaData;
 using KintelaDomain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Linq.Expressions;
 
-using (KintelaContext context=new KintelaContext())
+var builder = new ConfigurationBuilder()
+		.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+IConfiguration configuration = builder.Build();
+
+
+var optionsBuilder = new DbContextOptionsBuilder<KintelaContext>();
+optionsBuilder.UseSqlServer(configuration.GetConnectionString("KintelaDatabaseAzure"));
+
+using (var context = new KintelaContext(optionsBuilder.Options))
 {
 	context.Database.EnsureCreated();
 }
 
-KintelaContext _context = new KintelaContext();
+KintelaContext _context = new KintelaContext(optionsBuilder.Options);
+
+
+/*using (KintelaContext context=new KintelaContext())
+{
+	context.Database.EnsureCreated();
+}
+
+KintelaContext _context = new KintelaContext();*/
 
 
 //InsertTheWhoDiscos();
