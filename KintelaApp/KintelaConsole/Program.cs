@@ -31,7 +31,7 @@ KintelaContext _context = new KintelaContext();*/
 //InsertTheWhoDiscos();
 //InsertLedZeppelinDiscos();
 //InsertCDs1();
-InsertCDs2();
+//InsertCDs2();
 
 //GetGruposYDiscos();
 //GetGruposYDiscosAPartirDelYear(1982);
@@ -55,7 +55,8 @@ void InsertCDs1()
 
 	InsertOrUpdateGrupo("Adele", new List<CD>
 		{
-				new CD { Titulo = "21", YearPublicacion = 2011, IsInSpotify = true, Etiqueta = 77 }
+				new CD { Titulo = "21", YearPublicacion = 2011, IsInSpotify = true, Etiqueta = 77 },
+				new CD { Titulo = "19", YearPublicacion = 2008, IsInSpotify = true, Etiqueta = 587 }
 		});
 
 	InsertOrUpdateGrupo("Aerosmith", new List<CD>
@@ -104,7 +105,8 @@ void InsertCDs1()
 				new CD{ Titulo = "Live From Mars", YearPublicacion = 2001, IsInSpotify = true, Etiqueta = 553 },
 				new CD{ Titulo = "Live from Montreal International Jazz Festival", YearPublicacion = 2010, IsInSpotify = false, Etiqueta = 66 },
 				new CD{ Titulo = "There will be a light", YearPublicacion = 2004, IsInSpotify = true, Etiqueta = 260 },
-				new CD{ Titulo = "White lies for dark times", YearPublicacion = 2009, IsInSpotify = true, Etiqueta = 34 }
+				new CD{ Titulo = "White lies for dark times", YearPublicacion = 2009, IsInSpotify = true, Etiqueta = 34 },
+				new CD{ Titulo = "The Will to live", YearPublicacion = 1997, IsInSpotify = true, Etiqueta = 581 }
 		});
 
 	InsertOrUpdateGrupo("Bob Dylan", new List<CD>
@@ -444,7 +446,7 @@ void InsertCDs1()
 
 	InsertOrUpdateGrupo("Jimi Hendrix", new List<CD>
 {
-		new CD { Titulo = "Are You Experienced", YearPublicacion = 1967, IsInSpotify = true, Etiqueta = 22 },
+		new CD { Titulo = "Are You Experienced", YearPublicacion = 1967, IsInSpotify = true, Etiqueta = 313 },
 		new CD { Titulo = "Blues", YearPublicacion = 1984, IsInSpotify = true, Etiqueta = 320 },
 		new CD { Titulo = "Electric Ladyland", YearPublicacion = 1968, IsInSpotify = true, Etiqueta = 312 }
 });
@@ -503,7 +505,7 @@ void InsertCDs1()
 
 	InsertOrUpdateGrupo("KT Tunstall", new List<CD>
 {
-		new CD { Titulo = "Eye to the telescope", YearPublicacion = 2004, IsInSpotify = false, Etiqueta = 297 }
+		new CD { Titulo = "Eye to the telescope", YearPublicacion = 2004, IsInSpotify = true, Etiqueta = 297 }
 });
 
 	InsertOrUpdateGrupo("Kukuma", new List<CD>
@@ -675,7 +677,7 @@ void InsertCDs2()
 	{
 			new CD { Titulo = "back spacer", YearPublicacion = 2009, IsInSpotify = true, Etiqueta =52 },
 			new CD { Titulo = "Pearl Jam", YearPublicacion = 2006, IsInSpotify = true, Etiqueta =52 },
-			new CD { Titulo = "Ten", YearPublicacion = 1992, IsInSpotify = true, Etiqueta =2 }
+			new CD { Titulo = "Ten", YearPublicacion = 1992, IsInSpotify = true, Etiqueta =11 }
 	});
 
 	InsertOrUpdateGrupo("Pink Floyd", new List<CD>
@@ -786,7 +788,7 @@ void InsertCDs2()
 
 	InsertOrUpdateGrupo("The Meters", new List<CD>
 	{
-			new CD { Titulo = "Sundazed", YearPublicacion = 1969, IsInSpotify = false, Etiqueta =115 }
+			new CD { Titulo = "Sundazed", YearPublicacion = 1969, IsInSpotify = true, Etiqueta =115 }
 	});
 
 	InsertOrUpdateGrupo("The Police", new List<CD>
@@ -803,7 +805,7 @@ void InsertCDs2()
 	{
 			new CD { Titulo = "Exile on main street", YearPublicacion = 1972, IsInSpotify = true, Etiqueta =74 },
 			new CD { Titulo = "Stripped", YearPublicacion = 1995, IsInSpotify = true, Etiqueta =503 },
-			new CD { Titulo = "Tatoo You", YearPublicacion = 1981, IsInSpotify = true, Etiqueta =123 },
+			new CD { Titulo = "Tatoo You", YearPublicacion = 1981, IsInSpotify = true, Etiqueta =323 },
 			new CD { Titulo = "Vodoo Lounge", YearPublicacion = 1994, IsInSpotify = true, Etiqueta =324 }
 	});
 
@@ -871,10 +873,65 @@ void InsertCDs2()
 
 	InsertOrUpdateGrupo("ZZ Top", new List<CD>
 	{
-			new CD { Titulo = "Eliminator", YearPublicacion = 1983, IsInSpotify = true, Etiqueta =332 },
+			new CD { Titulo = "Eliminator", YearPublicacion = 1983, IsInSpotify = true, Etiqueta =322 },
 			new CD { Titulo = "Tres Hombres", YearPublicacion = 1973, IsInSpotify = true, Etiqueta =27 },
 			new CD { Titulo = "Fandango", YearPublicacion = 1975, IsInSpotify = true, Etiqueta =27 }
 	});
+
+	InsertOrUpdateGrupo("SodaStereo", new List<CD>
+	{
+			new CD { Titulo = "El último concierto", YearPublicacion = 1997, IsInSpotify = true, Etiqueta =341 },
+	});
+
+	InsertOrUpdateGrupo("The Velvet Underground & Nico", new List<CD>
+	{
+			new CD { Titulo = "The Velvet Underground", YearPublicacion = 1996, IsInSpotify = true, Etiqueta =585 },
+	});
+
+	InsertOrUpdateGrupo("Varios", new List<CD>
+	{
+			new CD { Titulo = "Reality Bites B.S.O", YearPublicacion = 1994, IsInSpotify = true, Etiqueta =586 },
+	});
+
+	InsertOrUpdateGrupo("Muse", new List<CD>
+	{
+			new CD { Titulo = "Black Holes & Revelations", YearPublicacion = 2006, IsInSpotify = true, Etiqueta =578 },
+	});
+
+	InsertOrUpdateGrupo("Simply Red", new List<CD>
+	{
+			new CD { Titulo = "Blue", YearPublicacion = 1998, IsInSpotify = true, Etiqueta =583 },
+			new CD { Titulo = "Picture book", YearPublicacion = 1985, IsInSpotify = true},
+			new CD { Titulo = "A new Flame", YearPublicacion = 1989, IsInSpotify = true},
+	});
+
+	InsertOrUpdateGrupo("Niña Pastori", new List<CD>
+	{
+			new CD { Titulo = "María", YearPublicacion = 2002, IsInSpotify = true,},
+	});
+
+	InsertOrUpdateGrupo("Sade", new List<CD>
+	{
+			new CD { Titulo = "Diamond Life", YearPublicacion = 1984, IsInSpotify = true,},
+	});
+
+	InsertOrUpdateGrupo("Rojo Nieva", new List<CD>
+	{
+			new CD { Titulo = "Rojo Nieve", YearPublicacion = 2013, IsInSpotify = true,},
+	});
+
+	InsertOrUpdateGrupo("Sound Garden", new List<CD>
+	{
+			new CD { Titulo = "King Animal", YearPublicacion = 2012, IsInSpotify = true,},
+	});
+
+	InsertOrUpdateGrupo("Antonio Orozco", new List<CD>
+	{
+			new CD { Titulo = "Semilla del silencio", YearPublicacion = 2001, IsInSpotify = true,},
+	});
+
+
+
 
 	_context.SaveChanges();
 
