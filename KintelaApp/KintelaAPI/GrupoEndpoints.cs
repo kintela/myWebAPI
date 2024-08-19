@@ -3,6 +3,7 @@ using KintelaData;
 using KintelaDomain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
+using KintelaAPI.DTOs;
 namespace KintelaAPI;
 
 public static class GrupoEndpoints

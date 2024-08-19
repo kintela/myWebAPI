@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<KintelaContext>(
 	opt =>opt
 	.UseSqlServer(builder.Configuration.GetConnectionString("KintelaDatabaseAzure"))
@@ -18,6 +19,16 @@ builder.Services.AddDbContext<KintelaContext>(
 builder.Services.ConfigureHttpJsonOptions(options=>
 	options.SerializerOptions.ReferenceHandler=ReferenceHandler.IgnoreCycles);
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAngularLocalhost",
+			builder =>
+			{
+				builder.WithOrigins("http://localhost:4200")
+								 .AllowAnyHeader()
+								 .AllowAnyMethod();
+			});
+});
 
 var app = builder.Build();
 
@@ -35,6 +46,8 @@ if (app.Environment.IsDevelopment())
 };
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAngularLocalhost");
 
 
 app.MapGrupoEndpoints();
