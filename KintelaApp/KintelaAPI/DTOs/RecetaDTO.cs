@@ -14,14 +14,14 @@
 			Comensales = comensales;
 		}
 
-    public int RecetaId { get; set; }
-		public string Nombre { get; set; }
-		public string[] Ingredientes { get; set; }
-		public string[] Preparacion { get; set; }
-		public string[] Presentacion { get; set; }
-		public int? Comensales { get; set; }
-		public string EnlaceVideo { get; set; }
-		public string Imagen { get; set; }
+    public int RecetaId { get; init; }
+		public string Nombre { get; init; }
+		public string[] Ingredientes { get; init; }
+		public string[] Preparacion { get; init; }
+		public string[] Presentacion { get; init; }
+		public int? Comensales { get; init; }
+		public string EnlaceVideo { get; init; }
+		public string Imagen { get; init; }
 
 	}
 }
