@@ -1,4 +1,4 @@
-﻿using KintelaAPI;
+﻿using KintelaAPI.EndPoints;
 using KintelaData;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;

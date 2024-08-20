@@ -4,17 +4,17 @@ using KintelaDomain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
 using KintelaAPI.DTOs;
-namespace KintelaAPI;
+namespace KintelaAPI.EndPoints;
 
 public static class GrupoEndpoints
 {
-    public static void MapGrupoEndpoints (this IEndpointRouteBuilder routes)
+    public static void MapGrupoEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/Grupo").WithTags(nameof(Grupo));
 
         group.MapGet("/WithDiscos", async (KintelaContext db) =>
         {
-            return await db.Grupos.Include(g=>g.Discos).AsNoTracking().ToListAsync();
+            return await db.Grupos.Include(g => g.Discos).AsNoTracking().ToListAsync();
         })
         .WithName("GetAllGruposWithDiscos")
         .WithOpenApi();
@@ -23,11 +23,11 @@ public static class GrupoEndpoints
         {
             return await db.Grupos.AsNoTracking()
                 .Where(model => model.GrupoId == grupoid)
-								.Select(model => new GrupoDTO(model.GrupoId, model.Nombre))
-								.FirstOrDefaultAsync()
-								is GrupoDTO model
-										? TypedResults.Ok(model)
-										: TypedResults.NotFound();
+                                .Select(model => new GrupoDTO(model.GrupoId, model.Nombre))
+                                .FirstOrDefaultAsync()
+                                is GrupoDTO model
+                                        ? TypedResults.Ok(model)
+                                        : TypedResults.NotFound();
         })
         .WithName("GetGrupoById")
         .WithOpenApi();
@@ -47,10 +47,10 @@ public static class GrupoEndpoints
 
         group.MapPost("/", async (GrupoDTO grupoDTO, KintelaContext db) =>
         {
-          var grupo= new Grupo{Nombre = grupoDTO.Nombre};
-          db.Grupos.Add(grupo);
-          await db.SaveChangesAsync();
-          return TypedResults.Created($"/api/Grupo/{grupo.GrupoId}",new GrupoDTO(grupo.GrupoId, grupo.Nombre));
+            var grupo = new Grupo { Nombre = grupoDTO.Nombre };
+            db.Grupos.Add(grupo);
+            await db.SaveChangesAsync();
+            return TypedResults.Created($"/api/Grupo/{grupo.GrupoId}", new GrupoDTO(grupo.GrupoId, grupo.Nombre));
         })
         .WithName("CreateGrupo")
         .WithOpenApi();
