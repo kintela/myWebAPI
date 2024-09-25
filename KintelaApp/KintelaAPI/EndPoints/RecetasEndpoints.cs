@@ -10,7 +10,7 @@ public static class RecetasEndpoints
 {
     public static void MapRecetasEndpoints(this IEndpointRouteBuilder routes)
     {
-      var group = routes.MapGroup("/api/Recetas").WithTags(nameof(Categoria));
+      var group = routes.MapGroup("/api/Recetas").WithTags(nameof(Receta));
 
 			group.MapGet("/", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (KintelaContext db) =>
 			{
@@ -54,6 +54,21 @@ public static class RecetasEndpoints
 		})
 		.WithName("GetRecetasPorCategoria")
 		.WithOpenApi();
+
+		group.MapGet("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound>> (int id, KintelaContext db) =>
+		{
+			var receta = await db.Recetas
+					.Where(r => r.RecetaId == id)
+					.Select(model => new RecetaDTO(model.RecetaId, model.Nombre, model.Ingredientes, model.Preparacion, model.Presentacion, model.EnlaceVideo, model.Imagen, model.Comensales))
+					.FirstOrDefaultAsync();
+
+			return receta != null
+					? TypedResults.Ok(receta)
+					: TypedResults.NotFound();
+		})
+		.WithName("GetRecetaById")
+		.WithOpenApi();
+
 
 
 

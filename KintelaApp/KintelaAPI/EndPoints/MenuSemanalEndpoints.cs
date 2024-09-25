@@ -192,47 +192,47 @@ public static class MenuSemanalEndpoints
 			.WithName("CheckMenuExists")
 			.WithOpenApi();
 
-		group.MapGet("/currentWeek", async Task<Results<Ok<MenuSemanalDTO>, NotFound>> (KintelaContext db, [FromQuery] int usuarioId) =>
-		{
-			var today = DateOnly.FromDateTime(DateTime.Today);
-			var startOfWeek = today.AddDays(-(int)today.DayOfWeek);
-			var endOfWeek = startOfWeek.AddDays(6);
+			group.MapGet("/currentWeek", async Task<Results<Ok<MenuSemanalDTO>, NotFound>> (KintelaContext db, [FromQuery] int usuarioId) =>
+			{
+				var today = DateOnly.FromDateTime(DateTime.Today);
+				var startOfWeek = today.AddDays(-(int)today.DayOfWeek);
+				var endOfWeek = startOfWeek.AddDays(6);
 
-			var menu = await db.MenuSemanal
-					.Where(m => m.FechaCreacion >= startOfWeek && m.FechaCreacion <= endOfWeek && m.UsuarioId == usuarioId)
-					.OrderBy(m => m.FechaCreacion)
-					.Select(model => new MenuSemanalDTO(
-							model.UsuarioId,
-							model.FechaCreacion.ToShortDateString(),
-							model.RecetaPrimerPlatoLunes,
-							model.RecetaSegundoPlatoLunes,
-							model.RecetaCenaLunes,
-							model.RecetaPrimerPlatoMartes,
-							model.RecetaSegundoPlatoMartes,
-							model.RecetaCenaMartes,
-							model.RecetaPrimerPlatoMiercoles,
-							model.RecetaSegundoPlatoMiercoles,
-							model.RecetaCenaMiercoles,
-							model.RecetaPrimerPlatoJueves,
-							model.RecetaSegundoPlatoJueves,
-							model.RecetaCenaJueves,
-							model.RecetaPrimerPlatoViernes,
-							model.RecetaSegundoPlatoViernes,
-							model.RecetaCenaViernes,
-							model.RecetaPrimerPlatoSabado,
-							model.RecetaSegundoPlatoSabado,
-							model.RecetaCenaSabado,
-							model.RecetaPrimerPlatoDomingo,
-							model.RecetaSegundoPlatoDomingo,
-							model.RecetaCenaDomingo))
-					.FirstOrDefaultAsync();
+				var menu = await db.MenuSemanal
+						.Where(m => m.FechaCreacion >= startOfWeek && m.FechaCreacion <= endOfWeek && m.UsuarioId == usuarioId)
+						.OrderBy(m => m.FechaCreacion)
+						.Select(model => new MenuSemanalDTO(
+								model.UsuarioId,
+								model.FechaCreacion.ToShortDateString(),
+								model.RecetaPrimerPlatoLunes,
+								model.RecetaSegundoPlatoLunes,
+								model.RecetaCenaLunes,
+								model.RecetaPrimerPlatoMartes,
+								model.RecetaSegundoPlatoMartes,
+								model.RecetaCenaMartes,
+								model.RecetaPrimerPlatoMiercoles,
+								model.RecetaSegundoPlatoMiercoles,
+								model.RecetaCenaMiercoles,
+								model.RecetaPrimerPlatoJueves,
+								model.RecetaSegundoPlatoJueves,
+								model.RecetaCenaJueves,
+								model.RecetaPrimerPlatoViernes,
+								model.RecetaSegundoPlatoViernes,
+								model.RecetaCenaViernes,
+								model.RecetaPrimerPlatoSabado,
+								model.RecetaSegundoPlatoSabado,
+								model.RecetaCenaSabado,
+								model.RecetaPrimerPlatoDomingo,
+								model.RecetaSegundoPlatoDomingo,
+								model.RecetaCenaDomingo))
+						.FirstOrDefaultAsync();
 
-			return menu != null
-					? TypedResults.Ok(menu)
-					: TypedResults.NotFound();
-		})
-.WithName("GetCurrentWeekMenuSemanal")
-.WithOpenApi();
+				return menu != null
+						? TypedResults.Ok(menu)
+						: TypedResults.NotFound();
+			})
+			.WithName("GetCurrentWeekMenuSemanal")
+			.WithOpenApi();
 
 
 
