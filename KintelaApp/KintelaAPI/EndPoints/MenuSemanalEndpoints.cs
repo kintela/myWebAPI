@@ -16,7 +16,7 @@ public static class MenuSemanalEndpoints
 			{
 				var menus = await db.MenuSemanal
 								.OrderBy(c => c.FechaCreacion)
-								.Select(model => new MenuSemanalDTO(model.UsuarioId, model.MenuSemanalId, model.FechaCreacion, model.RecetaPrimerPlatoLunes, model.RecetaSegundoPlatoLunes,		model.RecetaCenaLunes, model.RecetaPrimerPlatoMartes, model.RecetaSegundoPlatoMartes,model.RecetaCenaMartes, model.RecetaPrimerPlatoMiercoles,  model.RecetaSegundoPlatoMiercoles, model.RecetaCenaMiercoles, model.RecetaPrimerPlatoJueves, model.RecetaSegundoPlatoJueves,model.RecetaCenaJueves,model.RecetaPrimerPlatoViernes, model.RecetaSegundoPlatoViernes,model.RecetaCenaViernes,model.RecetaPrimerPlatoSabado, model.RecetaSegundoPlatoSabado, model.RecetaCenaSabado, model.RecetaPrimerPlatoDomingo, model.RecetaSegundoPlatoDomingo, model.RecetaCenaDomingo))
+								.Select(model => new MenuSemanalDTO(model.UsuarioId,model.FechaCreacion.ToShortDateString(), model.RecetaPrimerPlatoLunes, model.RecetaSegundoPlatoLunes,		model.RecetaCenaLunes, model.RecetaPrimerPlatoMartes, model.RecetaSegundoPlatoMartes,model.RecetaCenaMartes, model.RecetaPrimerPlatoMiercoles,  model.RecetaSegundoPlatoMiercoles, model.RecetaCenaMiercoles, model.RecetaPrimerPlatoJueves, model.RecetaSegundoPlatoJueves,model.RecetaCenaJueves,model.RecetaPrimerPlatoViernes, model.RecetaSegundoPlatoViernes,model.RecetaCenaViernes,model.RecetaPrimerPlatoSabado, model.RecetaSegundoPlatoSabado, model.RecetaCenaSabado, model.RecetaPrimerPlatoDomingo, model.RecetaSegundoPlatoDomingo, model.RecetaCenaDomingo))
 								.ToListAsync();
 
 				return menus.Any()
@@ -28,9 +28,14 @@ public static class MenuSemanalEndpoints
 
 		group.MapPost("/", async Task<Results<Created<MenuSemanalDTO>, BadRequest>> (KintelaContext db, MenuSemanalDTO menuDto) =>
 		{
+			DateOnly fechaCreacion;
+			if (!DateOnly.TryParse(menuDto.FechaCreacion, out fechaCreacion))
+			{
+				return TypedResults.BadRequest();  // Devuelve un error si la fecha no es válida
+			}
 			var menuSemanal = new MenuSemanal
 			{
-				FechaCreacion = menuDto.FechaCreacion,
+				FechaCreacion = fechaCreacion,
 				RecetaPrimerPlatoLunes = menuDto.RecetaPrimerPlatoLunes,
 				RecetaSegundoPlatoLunes = menuDto.RecetaSegundoPlatoLunes,
 				RecetaCenaLunes = menuDto.RecetaCenaLunes,
@@ -60,8 +65,7 @@ public static class MenuSemanalEndpoints
 
 			var createdMenuDto = new MenuSemanalDTO(
 					menuSemanal.UsuarioId,
-					menuSemanal.MenuSemanalId,
-					menuSemanal.FechaCreacion,
+					menuSemanal.FechaCreacion.ToShortDateString(),
 					menuSemanal.RecetaPrimerPlatoLunes,
 					menuSemanal.RecetaSegundoPlatoLunes,
 					menuSemanal.RecetaCenaLunes,

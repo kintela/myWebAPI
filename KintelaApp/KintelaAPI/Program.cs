@@ -16,8 +16,11 @@ builder.Services.AddDbContext<KintelaContext>(
 	.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 );
 
-builder.Services.ConfigureHttpJsonOptions(options=>
-	options.SerializerOptions.ReferenceHandler=ReferenceHandler.IgnoreCycles);
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+	options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+	options.SerializerOptions.PropertyNameCaseInsensitive = true;
+});
 
 builder.Services.AddCors(options =>
 {
@@ -52,5 +55,6 @@ app.UseCors("AllowAngularLocalhost");
 
 app.MapGrupoEndpoints();
 app.MapRecetasEndpoints();
+app.MapMenuSemanalEndpoints();
 
 app.Run();
