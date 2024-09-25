@@ -4,7 +4,15 @@ using KintelaDomain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
 using KintelaAPI.DTOs;
+using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 namespace KintelaAPI.EndPoints;
+
+public class ErrorResponse
+{
+	public string Error { get; set; }
+}
+
 
 public static class MenuSemanalEndpoints
 {
@@ -29,10 +37,13 @@ public static class MenuSemanalEndpoints
 		group.MapPost("/", async Task<Results<Created<MenuSemanalDTO>, BadRequest>> (KintelaContext db, MenuSemanalDTO menuDto) =>
 		{
 			DateOnly fechaCreacion;
+
 			if (!DateOnly.TryParse(menuDto.FechaCreacion, out fechaCreacion))
 			{
 				return TypedResults.BadRequest();  // Devuelve un error si la fecha no es válida
 			}
+
+		
 			var menuSemanal = new MenuSemanal
 			{
 				FechaCreacion = fechaCreacion,
@@ -94,8 +105,92 @@ public static class MenuSemanalEndpoints
 	 .WithName("CreateMenuSemanal")
 	 .WithOpenApi();
 
+		group.MapPut("/", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (KintelaContext db, [FromQuery] int usuarioId, [FromQuery(Name = "fecha")] string fechaCreacionStr, [FromBody] MenuSemanalDTO menuDto) =>
+		{
+			if (!DateOnly.TryParseExact(fechaCreacionStr, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly fechaCreacion))
+			{
+				return TypedResults.BadRequest(new ErrorResponse { Error = "Formato de fecha inválido." });
+			}
+
+			var existingMenu = await db.MenuSemanal
+				.AsTracking()
+				.FirstOrDefaultAsync(m => m.FechaCreacion == fechaCreacion && m.UsuarioId == usuarioId);
+
+			if (existingMenu == null)
+			{
+				return TypedResults.NotFound();
+			}
+
+			// Update properties
+			existingMenu.RecetaPrimerPlatoLunes = menuDto.RecetaPrimerPlatoLunes;
+			existingMenu.RecetaSegundoPlatoLunes = menuDto.RecetaSegundoPlatoLunes;
+			existingMenu.RecetaCenaLunes = menuDto.RecetaCenaLunes;
+			existingMenu.RecetaPrimerPlatoMartes = menuDto.RecetaPrimerPlatoMartes;
+			existingMenu.RecetaSegundoPlatoMartes = menuDto.RecetaSegundoPlatoMartes;
+			existingMenu.RecetaCenaMartes = menuDto.RecetaCenaMartes;
+			existingMenu.RecetaPrimerPlatoMiercoles = menuDto.RecetaPrimerPlatoMiercoles;
+			existingMenu.RecetaSegundoPlatoMiercoles = menuDto.RecetaSegundoPlatoMiercoles;
+			existingMenu.RecetaCenaMiercoles = menuDto.RecetaCenaMiercoles;
+			existingMenu.RecetaPrimerPlatoJueves = menuDto.RecetaPrimerPlatoJueves;
+			existingMenu.RecetaSegundoPlatoJueves = menuDto.RecetaSegundoPlatoJueves;
+			existingMenu.RecetaCenaJueves = menuDto.RecetaCenaJueves;
+			existingMenu.RecetaPrimerPlatoViernes = menuDto.RecetaPrimerPlatoViernes;
+			existingMenu.RecetaSegundoPlatoViernes = menuDto.RecetaSegundoPlatoViernes;
+			existingMenu.RecetaCenaViernes = menuDto.RecetaCenaViernes;
+			existingMenu.RecetaPrimerPlatoSabado = menuDto.RecetaPrimerPlatoSabado;
+			existingMenu.RecetaSegundoPlatoSabado = menuDto.RecetaSegundoPlatoSabado;
+			existingMenu.RecetaCenaSabado = menuDto.RecetaCenaSabado;
+			existingMenu.RecetaPrimerPlatoDomingo = menuDto.RecetaPrimerPlatoDomingo;
+			existingMenu.RecetaSegundoPlatoDomingo = menuDto.RecetaSegundoPlatoDomingo;
+			existingMenu.RecetaCenaDomingo = menuDto.RecetaCenaDomingo;
 
 
+			await db.SaveChangesAsync();
+
+			var updatedMenuDto = new MenuSemanalDTO(
+					existingMenu.UsuarioId,
+					existingMenu.FechaCreacion.ToShortDateString(),
+					existingMenu.RecetaPrimerPlatoLunes,
+					existingMenu.RecetaSegundoPlatoLunes,
+					existingMenu.RecetaCenaLunes,
+					existingMenu.RecetaPrimerPlatoMartes,
+					existingMenu.RecetaSegundoPlatoMartes,
+					existingMenu.RecetaCenaMartes,
+					existingMenu.RecetaPrimerPlatoMiercoles,
+					existingMenu.RecetaSegundoPlatoMiercoles,
+					existingMenu.RecetaCenaMiercoles,
+					existingMenu.RecetaPrimerPlatoJueves,
+					existingMenu.RecetaSegundoPlatoJueves,
+					existingMenu.RecetaCenaJueves,
+					existingMenu.RecetaPrimerPlatoViernes,
+					existingMenu.RecetaSegundoPlatoViernes,
+					existingMenu.RecetaCenaViernes,
+					existingMenu.RecetaPrimerPlatoSabado,
+					existingMenu.RecetaSegundoPlatoSabado,
+					existingMenu.RecetaCenaSabado,
+					existingMenu.RecetaPrimerPlatoDomingo,
+					existingMenu.RecetaSegundoPlatoDomingo,
+					existingMenu.RecetaCenaDomingo
+			);
+
+			return TypedResults.Ok(updatedMenuDto);
+		})
+		.WithName("UpdateMenuSemanal")
+		.WithOpenApi();
+
+		group.MapGet("/exists", async Task<Results<Ok<bool>, BadRequest>> (KintelaContext db, [FromQuery] int usuarioId, [FromQuery(Name = "fecha")] string fechaCreacionStr) =>
+		{
+			if (!DateOnly.TryParse(fechaCreacionStr, out DateOnly fechaCreacion))
+			{
+				return TypedResults.BadRequest();
+			}
+
+			var exists = await db.MenuSemanal.AnyAsync(m => m.FechaCreacion == fechaCreacion && m.UsuarioId == usuarioId);
+
+			return TypedResults.Ok(exists);
+		})
+		.WithName("CheckMenuExists")
+		.WithOpenApi();
 
 
 	}
