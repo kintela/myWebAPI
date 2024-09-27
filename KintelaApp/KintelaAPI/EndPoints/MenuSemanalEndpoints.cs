@@ -105,21 +105,32 @@ public static class MenuSemanalEndpoints
 		 .WithName("CreateMenuSemanal")
 		 .WithOpenApi();
 
-			group.MapPut("/", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (KintelaContext db, [FromQuery] int usuarioId, [FromQuery(Name = "fecha")] string fechaCreacionStr, [FromBody] MenuSemanalDTO menuDto) =>
-			{
+		group.MapPut("/{usuarioId}/{fechaCreacionStr}", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (
+			KintelaContext db,
+			[FromRoute] int usuarioId,
+			[FromRoute] string fechaCreacionStr,
+			[FromBody] MenuSemanalDTO menuDto) =>
+			{				
+
 				if (!DateOnly.TryParseExact(fechaCreacionStr, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly fechaCreacion))
 				{
 					return TypedResults.BadRequest(new ErrorResponse { Error = "Formato de fecha inválido." });
 				}
 
+				// Calcula el inicio y el final de la semana para la fecha proporcionada
+				var startOfWeek = fechaCreacion.AddDays(-(int)fechaCreacion.DayOfWeek);
+				var endOfWeek = startOfWeek.AddDays(6);
+
+				// Busca el registro en la base de datos dentro de ese rango de fechas
 				var existingMenu = await db.MenuSemanal
-					.AsTracking()
-					.FirstOrDefaultAsync(m => m.FechaCreacion == fechaCreacion && m.UsuarioId == usuarioId);
+						.AsTracking()
+						.FirstOrDefaultAsync(m => m.FechaCreacion >= startOfWeek && m.FechaCreacion <= endOfWeek && m.UsuarioId == usuarioId);
 
 				if (existingMenu == null)
 				{
 					return TypedResults.NotFound();
 				}
+
 
 				// Update properties
 				existingMenu.RecetaPrimerPlatoLunes = menuDto.RecetaPrimerPlatoLunes;
@@ -179,20 +190,26 @@ public static class MenuSemanalEndpoints
 			.WithOpenApi();
 
 			group.MapGet("/exists", async Task<Results<Ok<bool>, BadRequest>> (KintelaContext db, [FromQuery] int usuarioId, [FromQuery(Name = "fecha")] string fechaCreacionStr) =>
+		{
+			if (!DateOnly.TryParse(fechaCreacionStr, out DateOnly fechaCreacion))
 			{
-				if (!DateOnly.TryParse(fechaCreacionStr, out DateOnly fechaCreacion))
-				{
-					return TypedResults.BadRequest();
-				}
+				return TypedResults.BadRequest();
+			}
 
-				var exists = await db.MenuSemanal.AnyAsync(m => m.FechaCreacion == fechaCreacion && m.UsuarioId == usuarioId);
+			// Calcula el inicio y el final de la semana para la fecha proporcionada
+			var startOfWeek = fechaCreacion.AddDays(-(int)fechaCreacion.DayOfWeek);
+			var endOfWeek = startOfWeek.AddDays(6);
 
-				return TypedResults.Ok(exists);
-			})
+			// Verifica si hay algún registro en la base de datos dentro de ese rango de fechas
+			var exists = await db.MenuSemanal.AnyAsync(m => m.FechaCreacion >= startOfWeek && m.FechaCreacion <= endOfWeek && m.UsuarioId == usuarioId);
+
+			return TypedResults.Ok(exists);
+		})
 			.WithName("CheckMenuExists")
 			.WithOpenApi();
 
-			group.MapGet("/currentWeek", async Task<Results<Ok<MenuSemanalDTO>, NotFound>> (KintelaContext db, [FromQuery] int usuarioId) =>
+
+		group.MapGet("/currentWeek", async Task<Results<Ok<MenuSemanalDTO>, NotFound>> (KintelaContext db, [FromQuery] int usuarioId) =>
 			{
 				var today = DateOnly.FromDateTime(DateTime.Today);
 				var startOfWeek = today.AddDays(-(int)today.DayOfWeek);
