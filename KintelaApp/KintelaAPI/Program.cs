@@ -1,7 +1,10 @@
-﻿using KintelaAPI.EndPoints;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using KintelaAPI.EndPoints;
 using KintelaData;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,9 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var keyVaultName = builder.Configuration.GetValue<string>("KEY_VAULT_NAME");
+var kvUri = $"https://{keyVaultName}.vault.azure.net";
+var secretNameEncuestasSAP = builder.Configuration.GetValue<string>("SECRET_NAME");
+
+var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+
+KeyVaultSecret secretEncuestasSAP = client.GetSecret(secretNameEncuestasSAP);
+
+string connectionString = secretEncuestasSAP.Value;
+
+
 builder.Services.AddDbContext<KintelaContext>(
 	opt =>opt
-	.UseSqlServer(builder.Configuration.GetConnectionString("KintelaDatabaseAzure"))
+	//.UseSqlServer(builder.Configuration.GetConnectionString("KintelaDatabaseAzure"))
+	.UseSqlServer(connectionString)
 	.EnableSensitiveDataLogging()
 	.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 );
