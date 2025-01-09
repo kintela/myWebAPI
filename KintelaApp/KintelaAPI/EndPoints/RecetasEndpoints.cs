@@ -34,10 +34,10 @@ public static class RecetasEndpoints
 								? TypedResults.Ok(recetas)
 								: TypedResults.NotFound();
 			})
-		 .WithName("GetAllRecetas")
-		 .WithOpenApi();
+			 .WithName("GetAllRecetas")
+			 .WithOpenApi();
 
-		group.MapGet("/Categorias", async Task<Results<Ok<List<CategoriaDTO>>, NotFound>> (KintelaContext db) =>
+			group.MapGet("/Categorias", async Task<Results<Ok<List<CategoriaDTO>>, NotFound>> (KintelaContext db) =>
         {
             var categorias = await db.Categorias
                     .OrderBy(c => c.Nombre)
@@ -48,107 +48,159 @@ public static class RecetasEndpoints
                     ? TypedResults.Ok(categorias)
                     : TypedResults.NotFound();
         })
-        .WithName("GetAllCategorias")
-        .WithOpenApi();
+				.WithName("GetAllCategorias")
+				.WithOpenApi();
 
-		group.MapGet("/PorCategoria/{nombreCategoria}", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (string nombreCategoria, KintelaContext db) =>
-		{
-			var recetas = await db.Recetas
-				.Include(r => r.Categorias)
-				.Where(r => r.Categorias.Any(c => c.Nombre == nombreCategoria))
-				.OrderBy(r => r.Nombre)
-				.Select(model => new RecetaDTO(
-						model.RecetaId,
-						model.Nombre,
-						model.Ingredientes,
-						model.Preparacion,
-						model.Presentacion,
-						model.EnlaceVideo,
-						model.Imagen,
-						model.Comensales,
-						model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
-				))
-				.ToListAsync();
-
-			return recetas.Any()
-					? TypedResults.Ok(recetas)
-					: TypedResults.NotFound();
-		})
-		.WithName("GetRecetasPorCategoria")
-		.WithOpenApi();
-
-		group.MapGet("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound>> (int id, KintelaContext db) =>
-		{
-			var receta = await db.Recetas
-				.Include(r => r.Categorias)
-				.Where(r => r.RecetaId == id)
-				.Select(model => new RecetaDTO(
-						model.RecetaId,
-						model.Nombre,
-						model.Ingredientes,
-						model.Preparacion,
-						model.Presentacion,
-						model.EnlaceVideo,
-						model.Imagen,
-						model.Comensales,
-						model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
-				))
-				.FirstOrDefaultAsync();
-
-			return receta != null
-					? TypedResults.Ok(receta)
-					: TypedResults.NotFound();
-		})
-		.WithName("GetRecetaById")
-		.WithOpenApi();
-
-		group.MapPost("/", async Task<Results<Created<RecetaDTO>, BadRequest<ErrorResponse>>> (KintelaContext db, RecetaDTO recetaDto) =>
-		{
-			// Verifica si la categoría existe
-			var categoria = await db.Categorias.FirstOrDefaultAsync(c => c.CategoriaId == recetaDto.CategoriaId);
-			if (categoria == null)
+			group.MapGet("/PorCategoria/{nombreCategoria}", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (string nombreCategoria, KintelaContext db) =>
 			{
-				return TypedResults.BadRequest(new ErrorResponse { Error = "Categoría no encontrada." });
-			}
+				var recetas = await db.Recetas
+					.Include(r => r.Categorias)
+					.Where(r => r.Categorias.Any(c => c.Nombre == nombreCategoria))
+					.OrderBy(r => r.Nombre)
+					.Select(model => new RecetaDTO(
+							model.RecetaId,
+							model.Nombre,
+							model.Ingredientes,
+							model.Preparacion,
+							model.Presentacion,
+							model.EnlaceVideo,
+							model.Imagen,
+							model.Comensales,
+							model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
+					))
+					.ToListAsync();
 
-			// Crea la nueva receta
-			var receta = new Receta
+				return recetas.Any()
+						? TypedResults.Ok(recetas)
+						: TypedResults.NotFound();
+			})
+				.WithName("GetRecetasPorCategoria")
+				.WithOpenApi();
+
+			group.MapGet("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound>> (int id, KintelaContext db) =>
 			{
-				Nombre = recetaDto.Nombre,
-				Ingredientes = recetaDto.Ingredientes,
-				Preparacion = recetaDto.Preparacion,
-				Presentacion = recetaDto.Presentacion,
-				EnlaceVideo = recetaDto.EnlaceVideo,
-				Imagen = recetaDto.Imagen,
-				Comensales = recetaDto.Comensales
-			};
+				var receta = await db.Recetas
+					.Include(r => r.Categorias)
+					.Where(r => r.RecetaId == id)
+					.Select(model => new RecetaDTO(
+							model.RecetaId,
+							model.Nombre,
+							model.Ingredientes,
+							model.Preparacion,
+							model.Presentacion,
+							model.EnlaceVideo,
+							model.Imagen,
+							model.Comensales,
+							model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
+					))
+					.FirstOrDefaultAsync();
 
-			db.Recetas.Add(receta);
-			await db.SaveChangesAsync();
+				return receta != null
+						? TypedResults.Ok(receta)
+						: TypedResults.NotFound();
+			})
+				.WithName("GetRecetaById")
+				.WithOpenApi();
 
-			// Crea la relación entre la receta y la categoría
-			receta.Categorias.Add(categoria);
-			await db.SaveChangesAsync();
+			group.MapPost("/", async Task<Results<Created<RecetaDTO>, BadRequest<ErrorResponse>>> (KintelaContext db, RecetaDTO recetaDto) =>
+			{
+				// Verifica si la categoría existe
+				var categoria = await db.Categorias.FirstOrDefaultAsync(c => c.CategoriaId == recetaDto.CategoriaId);
+				if (categoria == null)
+				{
+					return TypedResults.BadRequest(new ErrorResponse { Error = "Categoría no encontrada." });
+				}
 
-			// Crea el DTO de la receta creada
-			var createdRecetaDto = new RecetaDTO(
-					receta.RecetaId,
-					receta.Nombre,
-					receta.Ingredientes,
-					receta.Preparacion,
-					receta.Presentacion,
-					receta.EnlaceVideo,
-					receta.Imagen,
-					receta.Comensales,
-					categoria.CategoriaId
-			);
+				// Crea la nueva receta
+				var receta = new Receta
+				{
+					Nombre = recetaDto.Nombre,
+					Ingredientes = recetaDto.Ingredientes,
+					Preparacion = recetaDto.Preparacion,
+					Presentacion = recetaDto.Presentacion,
+					EnlaceVideo = recetaDto.EnlaceVideo,
+					Imagen = recetaDto.Imagen,
+					Comensales = recetaDto.Comensales
+				};
 
-			return TypedResults.Created($"/api/Recetas/{receta.RecetaId}", createdRecetaDto);
-		})
-.WithName("CreateReceta")
-.WithOpenApi();
+				db.Recetas.Add(receta);
+				await db.SaveChangesAsync();
 
+				// Crea la relación entre la receta y la categoría
+				receta.Categorias.Add(categoria);
+				await db.SaveChangesAsync();
 
+				// Crea el DTO de la receta creada
+				var createdRecetaDto = new RecetaDTO(
+						receta.RecetaId,
+						receta.Nombre,
+						receta.Ingredientes,
+						receta.Preparacion,
+						receta.Presentacion,
+						receta.EnlaceVideo,
+						receta.Imagen,
+						receta.Comensales,
+						categoria.CategoriaId
+				);
+
+				return TypedResults.Created($"/api/Recetas/{receta.RecetaId}", createdRecetaDto);
+			})
+				.WithName("CreateReceta")
+				.WithOpenApi();
+
+			group.MapPut("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound, BadRequest<ErrorResponse>>> (int id, RecetaDTO recetaDto, KintelaContext db) =>
+			{
+				// Verifica si la receta existe
+				var receta = await db.Recetas
+						.Include(r => r.Categorias)
+						.FirstOrDefaultAsync(r => r.RecetaId == id);
+
+				if (receta == null)
+				{
+					return TypedResults.NotFound();
+				}
+
+				// Verifica si la categoría existe
+				var categoria = await db.Categorias.FirstOrDefaultAsync(c => c.CategoriaId == recetaDto.CategoriaId);
+				if (categoria == null)
+				{
+					return TypedResults.BadRequest(new ErrorResponse { Error = "Categoría no encontrada." });
+				}
+
+				// Actualiza los campos de la receta
+				receta.Nombre = recetaDto.Nombre;
+				receta.Ingredientes = recetaDto.Ingredientes;
+				receta.Preparacion = recetaDto.Preparacion;
+				receta.Presentacion = recetaDto.Presentacion;
+				receta.EnlaceVideo = recetaDto.EnlaceVideo;
+				receta.Imagen = recetaDto.Imagen;
+				receta.Comensales = recetaDto.Comensales;
+
+				// Actualiza la relación con la categoría
+				receta.Categorias.Clear();
+				receta.Categorias.Add(categoria);
+
+				db.Entry(receta).State = EntityState.Modified;
+
+				await db.SaveChangesAsync();
+
+				// Crea el DTO de la receta actualizada
+				var updatedRecetaDto = new RecetaDTO(
+						receta.RecetaId,
+						receta.Nombre,
+						receta.Ingredientes,
+						receta.Preparacion,
+						receta.Presentacion,
+						receta.EnlaceVideo,
+						receta.Imagen,
+						receta.Comensales,
+						categoria.CategoriaId
+				);
+
+				return TypedResults.Ok(updatedRecetaDto);
+			})
+				.WithName("UpdateReceta")
+				.WithOpenApi();
 
 
 
