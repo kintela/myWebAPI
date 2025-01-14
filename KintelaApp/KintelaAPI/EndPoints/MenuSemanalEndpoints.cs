@@ -24,7 +24,7 @@ public static class MenuSemanalEndpoints
 			{
 				var menus = await db.MenuSemanal
 								.OrderBy(c => c.FechaCreacion)
-								.Select(model => new MenuSemanalDTO(model.UsuarioId,model.FechaCreacion.ToShortDateString(), model.RecetaPrimerPlatoLunes, model.RecetaSegundoPlatoLunes,		model.RecetaCenaLunes, model.RecetaPrimerPlatoMartes, model.RecetaSegundoPlatoMartes,model.RecetaCenaMartes, model.RecetaPrimerPlatoMiercoles,  model.RecetaSegundoPlatoMiercoles, model.RecetaCenaMiercoles, model.RecetaPrimerPlatoJueves, model.RecetaSegundoPlatoJueves,model.RecetaCenaJueves,model.RecetaPrimerPlatoViernes, model.RecetaSegundoPlatoViernes,model.RecetaCenaViernes,model.RecetaPrimerPlatoSabado, model.RecetaSegundoPlatoSabado, model.RecetaCenaSabado, model.RecetaPrimerPlatoDomingo, model.RecetaSegundoPlatoDomingo, model.RecetaCenaDomingo))
+								.Select(model => new MenuSemanalDTO(model.MenuSemanalId, model.UsuarioId,model.FechaCreacion.ToShortDateString(), model.RecetaPrimerPlatoLunes, model.RecetaSegundoPlatoLunes,		model.RecetaCenaLunes, model.RecetaPrimerPlatoMartes, model.RecetaSegundoPlatoMartes,model.RecetaCenaMartes, model.RecetaPrimerPlatoMiercoles,  model.RecetaSegundoPlatoMiercoles, model.RecetaCenaMiercoles, model.RecetaPrimerPlatoJueves, model.RecetaSegundoPlatoJueves,model.RecetaCenaJueves,model.RecetaPrimerPlatoViernes, model.RecetaSegundoPlatoViernes,model.RecetaCenaViernes,model.RecetaPrimerPlatoSabado, model.RecetaSegundoPlatoSabado, model.RecetaCenaSabado, model.RecetaPrimerPlatoDomingo, model.RecetaSegundoPlatoDomingo, model.RecetaCenaDomingo))
 								.ToListAsync();
 
 				return menus.Any()
@@ -34,7 +34,7 @@ public static class MenuSemanalEndpoints
 		 .WithName("GetAllMenusSemanales")
 		 .WithOpenApi();
 
-		group.MapGet("/exists", async Task<Results<Ok<bool>, BadRequest>> (KintelaContext db, [FromQuery] int usuarioId, [FromQuery(Name = "fecha")] string fechaCreacionStr) =>
+			group.MapGet("/exists", async Task<Results<Ok<bool>, BadRequest>> (KintelaContext db, [FromQuery] int usuarioId, [FromQuery(Name = "fecha")] string fechaCreacionStr) =>
 		{
 			if (!DateOnly.TryParse(fechaCreacionStr, out DateOnly fechaCreacion))
 			{
@@ -53,8 +53,7 @@ public static class MenuSemanalEndpoints
 			.WithName("CheckMenuExists")
 			.WithOpenApi();
 
-
-		group.MapGet("/currentWeek/{usuarioId}", async Task<Results<Ok<MenuSemanalDTO>, NotFound>> (
+			group.MapGet("/currentWeek/{usuarioId}", async Task<Results<Ok<MenuSemanalDTO>, NotFound>> (
 			KintelaContext db, 
 			[FromRoute] int usuarioId) =>
 		{
@@ -66,6 +65,7 @@ public static class MenuSemanalEndpoints
 					.Where(m => m.FechaCreacion >= startOfWeek && m.FechaCreacion <= endOfWeek && m.UsuarioId == usuarioId)
 					.OrderBy(m => m.FechaCreacion)
 					.Select(model => new MenuSemanalDTO(
+							model.MenuSemanalId,
 							model.UsuarioId,
 							model.FechaCreacion.ToShortDateString(),
 							model.RecetaPrimerPlatoLunes,
@@ -98,8 +98,7 @@ public static class MenuSemanalEndpoints
 			.WithName("GetCurrentWeekMenuSemanal")
 			.WithOpenApi();
 
-
-		group.MapPost("/", async Task<Results<Created<MenuSemanalDTO>, BadRequest>> (KintelaContext db, MenuSemanalDTO menuDto) =>
+			group.MapPost("/", async Task<Results<Created<MenuSemanalDTO>, BadRequest>> (KintelaContext db, MenuSemanalDTO menuDto) =>
 			{
 				DateOnly fechaCreacion;
 
@@ -140,6 +139,7 @@ public static class MenuSemanalEndpoints
 				await db.SaveChangesAsync();
 
 				var createdMenuDto = new MenuSemanalDTO(
+						menuSemanal.MenuSemanalId,
 						menuSemanal.UsuarioId,
 						menuSemanal.FechaCreacion.ToShortDateString(),
 						menuSemanal.RecetaPrimerPlatoLunes,
@@ -170,7 +170,7 @@ public static class MenuSemanalEndpoints
 		 .WithName("CreateMenuSemanal")
 		 .WithOpenApi();
 
-		group.MapPut("/{usuarioId}/{fechaCreacionStr}", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (
+			group.MapPut("/{usuarioId}/{fechaCreacionStr}", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (
 			KintelaContext db,
 			[FromRoute] int usuarioId,
 			[FromRoute] string fechaCreacionStr,
@@ -224,6 +224,7 @@ public static class MenuSemanalEndpoints
 				await db.SaveChangesAsync();
 
 				var updatedMenuDto = new MenuSemanalDTO(
+						existingMenu.MenuSemanalId,
 						existingMenu.UsuarioId,
 						existingMenu.FechaCreacion.ToShortDateString(),
 						existingMenu.RecetaPrimerPlatoLunes,

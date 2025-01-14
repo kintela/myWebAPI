@@ -3,11 +3,12 @@
 	public class MenuSemanalDTO
 	{
 
-    public MenuSemanalDTO(int usuarioId,string fechaCreacion,int?recetaPrimerPlatoLunes, int? recetaSegundoPlatoLunes, int? recetaCenaLunes, int? recetaPrimerPlatoMartes,
+    public MenuSemanalDTO(int? menuSemanalId,int usuarioId,string fechaCreacion,int?recetaPrimerPlatoLunes, int? recetaSegundoPlatoLunes, int? recetaCenaLunes, int? recetaPrimerPlatoMartes,
 			int? recetaSegundoPlatoMartes, int? recetaCenaMartes, int? recetaPrimerPlatoMiercoles, int? recetaSegundoPlatoMiercoles, int? recetaCenaMiercoles,
 			int? recetaPrimerPlatoJueves, int? recetaSegundoPlatoJueves, int? recetaCenaJueves, int? recetaPrimerPlatoViernes, int? recetaSegundoPlatoViernes, int? recetaCenaViernes,
 			int? recetaPrimerPlatoSabado, int? recetaSegundoPlatoSabado, int? recetaCenaSabado, int? recetaPrimerPlatoDomingo, int? recetaSegundoPlatoDomingo, int? recetaCenaDomingo)
     {
+			MenuSemanalId = menuSemanalId;
 			UsuarioId = usuarioId;
 			FechaCreacion = fechaCreacion;
 			RecetaPrimerPlatoLunes = recetaPrimerPlatoLunes;
@@ -34,6 +35,7 @@
 
     }
 
+		public int? MenuSemanalId { get; init; }
 		public int UsuarioId { get; init; }
 		public string FechaCreacion { get; init; }
 
