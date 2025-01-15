@@ -8,12 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 namespace KintelaAPI.EndPoints;
 
-public class ErrorResponse
-{
-	public string Error { get; set; }
-}
-
-
 public static class MenuSemanalEndpoints
 {
     public static void MapMenuSemanalEndpoints(this IEndpointRouteBuilder routes)

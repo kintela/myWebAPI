@@ -71,5 +71,6 @@ app.UseCors("AllowAngularLocalhost");
 app.MapGrupoEndpoints();
 app.MapRecetasEndpoints();
 app.MapMenuSemanalEndpoints();
+app.MapCategoriaEndpoints();
 
 app.Run();
