@@ -2,7 +2,7 @@
 {
 	public class RecetaDTO
 	{
-		public RecetaDTO(int recetaId, string nombre, string[] ingredientes, string[] preparacion, string[] presentacion, string enlaceVideo, string imagen, int? comensales, int? categoriaId)
+		public RecetaDTO(int recetaId, string nombre, string[] ingredientes, string[] preparacion, string[] presentacion, string enlaceVideo, string imagen, int? comensales, List<int> categoriaIds)
 		{
 			RecetaId = recetaId;
 			Nombre = nombre;
@@ -12,7 +12,7 @@
 			EnlaceVideo = enlaceVideo;
 			Imagen = imagen;
 			Comensales = comensales;
-			CategoriaId = categoriaId;
+			CategoriaIds = categoriaIds;
 		}
 
     public int RecetaId { get; init; }
@@ -23,7 +23,7 @@
 		public int? Comensales { get; init; }
 		public string EnlaceVideo { get; init; }
 		public string Imagen { get; init; }
-		public int? CategoriaId { get; init; }
+		public List<int> CategoriaIds { get; init; }
 
 	}
 }

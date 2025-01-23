@@ -26,7 +26,7 @@ public static class RecetasEndpoints
 						model.EnlaceVideo,
 						model.Imagen,
 						model.Comensales,
-						model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
+						model.Categorias.Select(c => c.CategoriaId).ToList()
 				))
 				.ToListAsync();
 
@@ -66,7 +66,7 @@ public static class RecetasEndpoints
 							model.EnlaceVideo,
 							model.Imagen,
 							model.Comensales,
-							model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
+							model.Categorias.Select(c => c.CategoriaId).ToList()
 					))
 					.ToListAsync();
 
@@ -91,7 +91,7 @@ public static class RecetasEndpoints
 							model.EnlaceVideo,
 							model.Imagen,
 							model.Comensales,
-							model.Categorias.FirstOrDefault().CategoriaId // Asumiendo que cada receta tiene una sola categoría
+							model.Categorias.Select(c => c.CategoriaId).ToList()
 					))
 					.FirstOrDefaultAsync();
 
@@ -104,11 +104,11 @@ public static class RecetasEndpoints
 
 			group.MapPost("/", async Task<Results<Created<RecetaDTO>, BadRequest<ErrorResponse>>> (KintelaContext db, RecetaDTO recetaDto) =>
 			{
-				// Verifica si la categoría existe
-				var categoria = await db.Categorias.FirstOrDefaultAsync(c => c.CategoriaId == recetaDto.CategoriaId);
-				if (categoria == null)
+				// Verifica si las categorías existen
+				var categorias = await db.Categorias.Where(c => recetaDto.CategoriaIds.Contains(c.CategoriaId)).ToListAsync();
+				if (categorias.Count != recetaDto.CategoriaIds.Count)
 				{
-					return TypedResults.BadRequest(new ErrorResponse { Error = "Categoría no encontrada." });
+					return TypedResults.BadRequest(new ErrorResponse { Error = "Una o más categorías no fueron encontradas." });
 				}
 
 				// Crea la nueva receta
@@ -126,8 +126,8 @@ public static class RecetasEndpoints
 				db.Recetas.Add(receta);
 				await db.SaveChangesAsync();
 
-				// Crea la relación entre la receta y la categoría
-				receta.Categorias.Add(categoria);
+				// Crea la relación entre la receta y las categorías
+				receta.Categorias.AddRange(categorias);
 				await db.SaveChangesAsync();
 
 				// Crea el DTO de la receta creada
@@ -140,7 +140,7 @@ public static class RecetasEndpoints
 						receta.EnlaceVideo,
 						receta.Imagen,
 						receta.Comensales,
-						categoria.CategoriaId
+						categorias.Select(c => c.CategoriaId).ToList()
 				);
 
 				return TypedResults.Created($"/api/Recetas/{receta.RecetaId}", createdRecetaDto);
@@ -160,11 +160,11 @@ public static class RecetasEndpoints
 					return TypedResults.NotFound();
 				}
 
-				// Verifica si la categoría existe
-				var categoria = await db.Categorias.FirstOrDefaultAsync(c => c.CategoriaId == recetaDto.CategoriaId);
-				if (categoria == null)
+				// Verifica si las categorías existen
+				var categorias = await db.Categorias.Where(c => recetaDto.CategoriaIds.Contains(c.CategoriaId)).ToListAsync();
+				if (categorias.Count != recetaDto.CategoriaIds.Count)
 				{
-					return TypedResults.BadRequest(new ErrorResponse { Error = "Categoría no encontrada." });
+					return TypedResults.BadRequest(new ErrorResponse { Error = "Una o más categorías no fueron encontradas." });
 				}
 
 				// Actualiza los campos de la receta
@@ -178,7 +178,7 @@ public static class RecetasEndpoints
 
 				// Actualiza la relación con la categoría
 				receta.Categorias.Clear();
-				receta.Categorias.Add(categoria);
+				receta.Categorias.AddRange(categorias);
 
 				db.Entry(receta).State = EntityState.Modified;
 
@@ -194,7 +194,7 @@ public static class RecetasEndpoints
 						receta.EnlaceVideo,
 						receta.Imagen,
 						receta.Comensales,
-						categoria.CategoriaId
+						categorias.Select(c => c.CategoriaId).ToList()
 				);
 
 				return TypedResults.Ok(updatedRecetaDto);
