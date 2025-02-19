@@ -164,26 +164,15 @@ public static class MenuSemanalEndpoints
 		 .WithName("CreateMenuSemanal")
 		 .WithOpenApi();
 
-			group.MapPut("/{usuarioId}/{fechaCreacionStr}", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (
+			group.MapPut("/{menuSemanalId}", async Task<Results<Ok<MenuSemanalDTO>, NotFound, BadRequest<ErrorResponse>>> (
 			KintelaContext db,
-			[FromRoute] int usuarioId,
-			[FromRoute] string fechaCreacionStr,
+			[FromRoute] int menuSemanalId,
 			[FromBody] MenuSemanalDTO menuDto) =>
 			{				
 
-				if (!DateOnly.TryParseExact(fechaCreacionStr, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly fechaCreacion))
-				{
-					return TypedResults.BadRequest(new ErrorResponse { Error = "Formato de fecha inválido." });
-				}
-
-				// Calcula el inicio y el final de la semana para la fecha proporcionada
-				var startOfWeek = fechaCreacion.AddDays(-(int)fechaCreacion.DayOfWeek);
-				var endOfWeek = startOfWeek.AddDays(6);
-
-				// Busca el registro en la base de datos dentro de ese rango de fechas
 				var existingMenu = await db.MenuSemanal
 						.AsTracking()
-						.FirstOrDefaultAsync(m => m.FechaCreacion >= startOfWeek && m.FechaCreacion <= endOfWeek && m.UsuarioId == usuarioId);
+						.FirstOrDefaultAsync(m => m.MenuSemanalId == menuSemanalId);
 
 				if (existingMenu == null)
 				{
