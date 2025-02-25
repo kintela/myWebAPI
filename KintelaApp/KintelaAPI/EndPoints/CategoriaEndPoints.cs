@@ -10,7 +10,22 @@ namespace KintelaAPI.EndPoints
 	{
 		public static void MapCategoriaEndpoints(this IEndpointRouteBuilder routes)
 		{
-			var group = routes.MapGroup("/api/Categoria").WithTags(nameof(Categoria));
+			var group = routes.MapGroup("/api/Categorias").WithTags(nameof(Categoria));
+
+			group.MapGet("/", async Task<Results<Ok<List<CategoriaDTO>>, NotFound>> (KintelaContext db) =>
+			{
+				var categorias = await db.Categorias
+								.OrderBy(c => c.Nombre)
+								.Select(model => new CategoriaDTO(model.CategoriaId, model.Nombre))
+								.ToListAsync();
+
+				return categorias.Any()
+								? TypedResults.Ok(categorias)
+								: TypedResults.NotFound();
+			})
+				.WithName("GetAllCategorias")
+				.WithOpenApi();
+
 
 			group.MapPost("/", async Task<Results<Created<CategoriaDTO>, BadRequest<ErrorResponse>>> (KintelaContext db, CategoriaDTO categoriaDTO) =>
 			{

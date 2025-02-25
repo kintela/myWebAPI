@@ -37,7 +37,7 @@ public static class RecetasEndpoints
 			 .WithName("GetAllRecetas")
 			 .WithOpenApi();
 
-			group.MapGet("/Categorias", async Task<Results<Ok<List<CategoriaDTO>>, NotFound>> (KintelaContext db) =>
+			/*group.MapGet("/Categorias", async Task<Results<Ok<List<CategoriaDTO>>, NotFound>> (KintelaContext db) =>
         {
             var categorias = await db.Categorias
                     .OrderBy(c => c.Nombre)
@@ -49,7 +49,7 @@ public static class RecetasEndpoints
                     : TypedResults.NotFound();
         })
 				.WithName("GetAllCategorias")
-				.WithOpenApi();
+				.WithOpenApi();*/
 
 			group.MapGet("/PorCategoria/{nombreCategoria}", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (string nombreCategoria, KintelaContext db) =>
 			{
