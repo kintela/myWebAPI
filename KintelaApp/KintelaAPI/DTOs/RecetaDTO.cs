@@ -1,4 +1,6 @@
-﻿namespace KintelaAPI.DTOs
+﻿using System.Text.Json.Serialization;
+
+namespace KintelaAPI.DTOs
 {
 	public class RecetaDTO
 	{
@@ -24,6 +26,7 @@
 		public string EnlaceVideo { get; init; }
 		public string Imagen { get; init; }
 		public List<int> CategoriaIds { get; init; }
+
 
 	}
 }

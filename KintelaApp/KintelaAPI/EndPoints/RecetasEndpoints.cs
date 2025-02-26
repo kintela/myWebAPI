@@ -4,6 +4,11 @@ using KintelaDomain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
 using KintelaAPI.DTOs;
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
+using System.Text.Json;
+using Newtonsoft.Json;
 namespace KintelaAPI.EndPoints;
 
 public static class RecetasEndpoints
@@ -12,7 +17,9 @@ public static class RecetasEndpoints
     {
       var group = routes.MapGroup("/api/Recetas").WithTags(nameof(Receta));
 
-			group.MapGet("/", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (KintelaContext db) =>
+			//group.WithMetadata(new IgnoreAntiforgeryTokenAttribute());
+
+		group.MapGet("/", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (KintelaContext db) =>
 			{
 				var recetas = await db.Recetas
 				.Include(r => r.Categorias)
@@ -36,20 +43,6 @@ public static class RecetasEndpoints
 			})
 			 .WithName("GetAllRecetas")
 			 .WithOpenApi();
-
-			/*group.MapGet("/Categorias", async Task<Results<Ok<List<CategoriaDTO>>, NotFound>> (KintelaContext db) =>
-        {
-            var categorias = await db.Categorias
-                    .OrderBy(c => c.Nombre)
-                    .Select(model => new CategoriaDTO(model.CategoriaId, model.Nombre))
-                    .ToListAsync();
-
-            return categorias.Any()
-                    ? TypedResults.Ok(categorias)
-                    : TypedResults.NotFound();
-        })
-				.WithName("GetAllCategorias")
-				.WithOpenApi();*/
 
 			group.MapGet("/PorCategoria/{nombreCategoria}", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (string nombreCategoria, KintelaContext db) =>
 			{
@@ -102,7 +95,33 @@ public static class RecetasEndpoints
 				.WithName("GetRecetaById")
 				.WithOpenApi();
 
-			group.MapPost("/", async Task<Results<Created<RecetaDTO>, BadRequest<ErrorResponse>>> (KintelaContext db, RecetaDTO recetaDto) =>
+		group.MapGet("/PorIngrediente/{nombreIngrediente}", async Task<Results<Ok<List<RecetaDTO>>, NotFound>> (string nombreIngrediente, KintelaContext db) =>
+		{
+			var recetas = await db.Recetas
+					.Include(r => r.Categorias)
+					.Where(r => r.Ingredientes.Contains(nombreIngrediente))
+					.OrderBy(r => r.Nombre)
+					.Select(model => new RecetaDTO(
+									model.RecetaId,
+									model.Nombre,
+									model.Ingredientes,
+									model.Preparacion,
+									model.Presentacion,
+									model.EnlaceVideo,
+									model.Imagen,
+									model.Comensales,
+									model.Categorias.Select(c => c.CategoriaId).ToList()
+					))
+					.ToListAsync();
+
+			return recetas.Any()
+							? TypedResults.Ok(recetas)
+							: TypedResults.NotFound();
+		})
+						.WithName("GetRecetasPorIngrediente")
+						.WithOpenApi();
+
+		group.MapPost("/", async Task<Results<Created<RecetaDTO>, BadRequest<ErrorResponse>>> (KintelaContext db, RecetaDTO recetaDto) =>
 			{
 				// Verifica si las categorías existen
 				var categorias = await db.Categorias.Where(c => recetaDto.CategoriaIds.Contains(c.CategoriaId)).ToListAsync();
@@ -148,9 +167,85 @@ public static class RecetasEndpoints
 				.WithName("CreateReceta")
 				.WithOpenApi();
 
-			group.MapPut("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound, BadRequest<ErrorResponse>>> (int id, RecetaDTO recetaDto, KintelaContext db) =>
+		group.MapPut("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound, BadRequest<ErrorResponse>>> (int id, [FromForm] RecetaUpdateModel model, KintelaContext db, [FromServices] IConfiguration configuration) =>
+		{
+			var recetaRecibida = JsonConvert.DeserializeObject<RecetaDTO>(model.Receta);
+			var image = model.Image;
+
+			// Verifica si la receta existe
+			var receta = await db.Recetas
+					.Include(r => r.Categorias)
+					.FirstOrDefaultAsync(r => r.RecetaId == id);
+
+			if (receta == null)
 			{
-				// Verifica si la receta existe
+				return TypedResults.NotFound();
+			}
+
+			// Verifica si las categorías existen
+			var categorias = await db.Categorias.Where(c => recetaRecibida.CategoriaIds.Contains(c.CategoriaId)).ToListAsync();
+			if (categorias.Count != recetaRecibida.CategoriaIds.Count)
+			{
+				return TypedResults.BadRequest(new ErrorResponse { Error = "Una o más categorías no fueron encontradas." });
+			}
+
+			// Actualiza los campos de la receta
+			receta.Nombre = receta.Nombre;
+			receta.Ingredientes = receta.Ingredientes;
+			receta.Preparacion = receta.Preparacion;
+			receta.Presentacion = receta.Presentacion;
+			receta.EnlaceVideo = receta.EnlaceVideo;
+			receta.Comensales = receta.Comensales;
+
+			/*if image.Files.Count > 0)			{
+				var image = request.Form.Files[0];
+				if (image.Length > 0)
+				{
+					var connectionString = configuration.GetValue<string>("AzureBlobStorage:ConnectionString");
+					var containerName = configuration.GetValue<string>("AzureBlobStorage:ContainerName");
+
+					var blobServiceClient = new BlobServiceClient(connectionString);
+					var blobContainerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+					var blobClient = blobContainerClient.GetBlobClient(image.FileName);
+
+					using (var stream = image.OpenReadStream())
+					{
+						await blobClient.UploadAsync(stream, true);
+					}
+
+					receta.Imagen = blobClient.Uri.ToString();
+				}
+			}*/
+
+			// Actualiza la relación con la categoría
+			receta.Categorias.Clear();
+			receta.Categorias.AddRange(categorias);
+
+			db.Entry(receta).State = EntityState.Modified;
+
+			await db.SaveChangesAsync();
+
+			// Crea el DTO de la receta actualizada
+			var updatedRecetaDto = new RecetaDTO(
+					receta.RecetaId,
+					receta.Nombre,
+					receta.Ingredientes,
+					receta.Preparacion,
+					receta.Presentacion,
+					receta.EnlaceVideo,
+					receta.Imagen,
+					receta.Comensales,
+					categorias.Select(c => c.CategoriaId).ToList()
+			);
+
+			return TypedResults.Ok(updatedRecetaDto);
+		})
+	.WithName("UpdateReceta")
+	.WithOpenApi();
+
+		/*group.MapPut("/{id}", async Task<Results<Ok<RecetaDTO>, NotFound, BadRequest<ErrorResponse>>> (int id, [FromForm] RecetaDTO recetaDto, [FromForm] IFormFile? image, KintelaContext db, [FromServices]  IConfiguration configuration) =>
+			{
 				var receta = await db.Recetas
 						.Include(r => r.Categorias)
 						.FirstOrDefaultAsync(r => r.RecetaId == id);
@@ -160,14 +255,12 @@ public static class RecetasEndpoints
 					return TypedResults.NotFound();
 				}
 
-				// Verifica si las categorías existen
 				var categorias = await db.Categorias.Where(c => recetaDto.CategoriaIds.Contains(c.CategoriaId)).ToListAsync();
 				if (categorias.Count != recetaDto.CategoriaIds.Count)
 				{
 					return TypedResults.BadRequest(new ErrorResponse { Error = "Una o más categorías no fueron encontradas." });
 				}
 
-				// Actualiza los campos de la receta
 				receta.Nombre = recetaDto.Nombre;
 				receta.Ingredientes = recetaDto.Ingredientes;
 				receta.Preparacion = recetaDto.Preparacion;
@@ -176,7 +269,24 @@ public static class RecetasEndpoints
 				receta.Imagen = recetaDto.Imagen;
 				receta.Comensales = recetaDto.Comensales;
 
-				// Actualiza la relación con la categoría
+				if (image != null && image.Length > 0)
+				{
+					var connectionString = configuration.GetValue<string>("AzureBlobStorage:ConnectionString");
+					var containerName = configuration.GetValue<string>("AzureBlobStorage:ContainerName");
+
+					var blobServiceClient = new BlobServiceClient(connectionString);
+					var blobContainerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+					var blobClient = blobContainerClient.GetBlobClient(image.FileName);
+
+					using (var stream = image.OpenReadStream())
+					{
+						await blobClient.UploadAsync(stream, true);
+					}
+
+					receta.Imagen = blobClient.Uri.ToString();
+				}
+
 				receta.Categorias.Clear();
 				receta.Categorias.AddRange(categorias);
 
@@ -184,7 +294,6 @@ public static class RecetasEndpoints
 
 				await db.SaveChangesAsync();
 
-				// Crea el DTO de la receta actualizada
 				var updatedRecetaDto = new RecetaDTO(
 						receta.RecetaId,
 						receta.Nombre,
@@ -200,8 +309,7 @@ public static class RecetasEndpoints
 				return TypedResults.Ok(updatedRecetaDto);
 			})
 				.WithName("UpdateReceta")
-				.WithOpenApi();
-
+				.WithOpenApi();*/
 
 
 	}

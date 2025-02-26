@@ -67,6 +67,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowAngularLocalhost");
 
+//app.UseAntiforgery();
 
 app.MapGrupoEndpoints();
 app.MapRecetasEndpoints();
